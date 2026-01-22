@@ -1,0 +1,61 @@
+# Deploy to Staging - planometrica-landing
+# URL: https://staging.planometrica.ru
+# Server: 81.19.135.123
+# Directory: /var/www/staging-landing
+
+name: Deploy to Staging
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+env:
+  NODE_VERSION: '20'
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Deploy to staging server
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.STAGING_HOST }}
+          username: ${{ secrets.STAGING_USER }}
+          key: ${{ secrets.STAGING_SSH_KEY }}
+          source: "dist/*"
+          target: "/var/www/staging-landing"
+          strip_components: 1
+          rm: true
+
+      - name: Reload Nginx
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.STAGING_HOST }}
+          username: ${{ secrets.STAGING_USER }}
+          key: ${{ secrets.STAGING_SSH_KEY }}
+          script: |
+            sudo chown -R www-data:www-data /var/www/staging-landing
+            sudo nginx -t && sudo nginx -s reload
+            echo "✅ Deployed to https://staging.planometrica.ru"
+
+      - name: Health check
+        run: |
+          sleep 5
+          curl -sf -u planometrica:staging2026 https://staging.planometrica.ru || echo "Warning: Health check failed"

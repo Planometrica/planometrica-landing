@@ -1,0 +1,219 @@
+---
+import Layout from '../layouts/Layout.astro'
+import ProductHero from '../components/ProductHero.astro'
+import ProductFeatures from '../components/ProductFeatures.astro'
+import ProductCTA from '../components/ProductCTA.astro'
+
+const features = [
+  {
+    icon: `<svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M9 6.75V15m6-6v8.25m.503 3.498l4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 00-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0z" />
+    </svg>`,
+    title: 'СПОЗУ',
+    description: 'Схема планировочной организации земельного участка. Автоматическая генерация по данным проекта и участка.'
+  },
+  {
+    icon: `<svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+    </svg>`,
+    title: 'Проектный пакет',
+    description: 'Полный комплект документации для строительства: архитектурные чертежи, конструктив, инженерия.'
+  },
+  {
+    icon: `<svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+    </svg>`,
+    title: 'Планы этажей',
+    description: 'Детальные поэтажные планы с размерами, экспликацией помещений и спецификацией отделки.'
+  },
+  {
+    icon: `<svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6H15m-1.5 3H15m-1.5 3H15M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21" />
+    </svg>`,
+    title: 'Фасады',
+    description: 'Чертежи фасадов со всех сторон здания с указанием отметок и отделочных материалов.'
+  },
+  {
+    icon: `<svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z" />
+    </svg>`,
+    title: 'Разрезы',
+    description: 'Вертикальные разрезы здания с конструктивными узлами и высотными отметками.'
+  },
+  {
+    icon: `<svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25z" />
+    </svg>`,
+    title: 'Ведомости и сметы',
+    description: 'Ведомости материалов, окон, дверей. Предварительные сметы на строительство и отделку.'
+  }
+]
+
+const packages = [
+  {
+    name: 'СПОЗУ',
+    price: '4 990',
+    description: 'Для уведомления о строительстве',
+    includes: [
+      'Схема участка с домом',
+      'Зоны отступов',
+      'Подъезды и проезды',
+      'Соответствие нормам',
+      'Готово за 1 день'
+    ]
+  },
+  {
+    name: 'Эскизный проект',
+    price: '14 990',
+    description: 'Для согласования и визуализации',
+    includes: [
+      'Планы этажей',
+      'Фасады',
+      '3D визуализация',
+      'Описание конструкций',
+      'Готово за 3 дня'
+    ],
+    popular: true
+  },
+  {
+    name: 'Полный проект',
+    price: '49 990',
+    description: 'Для строительства',
+    includes: [
+      'Всё из Эскизного',
+      'Разрезы и узлы',
+      'Конструктивные решения',
+      'Ведомости материалов',
+      'Готово за 7 дней'
+    ]
+  }
+]
+---
+
+<Layout
+  title="Проектная документация — СПОЗУ, чертежи, ведомости"
+  description="Автоматическая генерация проектной документации для ИЖС. СПОЗУ, планы, фасады, разрезы, сметы."
+  transparentHeader={true}
+>
+  <main>
+    <ProductHero
+      badge="Документация"
+      title="Документы"
+      subtitle="Готовая документация для строительства"
+      description="Автоматическая генерация проектной документации из вашего проекта. СПОЗУ, планы этажей, фасады, разрезы, сметы — всё по ГОСТ."
+      gradient="from-[#0A4C76] to-[#1A7BB3]"
+      primaryCta={{ text: 'Создать документы', href: 'https://studio.planometrica.pro/docs' }}
+      secondaryCta={{ text: 'Примеры документов', href: '#examples' }}
+      features={['СПОЗУ', 'Планы этажей', 'Фасады', 'Сметы']}
+    />
+
+    <ProductFeatures
+      badge="Состав"
+      title="Полный комплект документации"
+      subtitle="Всё необходимое для согласования и строительства"
+      features={features}
+    />
+
+    <!-- Packages -->
+    <section class="py-24 bg-white">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-16">
+          <span class="inline-block px-4 py-2 bg-[#92CF93]/20 text-[#1A7BB3] font-medium rounded-full text-sm mb-4">
+            Пакеты документов
+          </span>
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+            Выберите комплект
+          </h2>
+          <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+            Документация под любую задачу — от уведомления до полного проекта
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+          {packages.map((pkg) => (
+            <div class:list={[
+              "bg-white rounded-2xl p-8 border-2 relative",
+              pkg.popular ? "border-[#0A4C76]" : "border-gray-200"
+            ]}>
+              {pkg.popular && (
+                <div class="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 bg-[#0A4C76] text-white text-sm font-medium rounded-full">
+                  Популярный
+                </div>
+              )}
+              <h3 class="text-xl font-semibold text-gray-900 mb-2">{pkg.name}</h3>
+              <p class="text-gray-600 mb-6">{pkg.description}</p>
+              <div class="mb-6">
+                <span class="text-4xl font-bold text-gray-900">{pkg.price} ₽</span>
+              </div>
+              <ul class="space-y-3 mb-8">
+                {pkg.includes.map((item) => (
+                  <li class="flex items-center gap-2 text-gray-600">
+                    <svg class="w-5 h-5 text-[#92CF93]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <a
+                href="https://studio.planometrica.pro/docs"
+                class:list={[
+                  "block w-full py-3 text-center font-semibold rounded-xl transition-colors",
+                  pkg.popular
+                    ? "text-white bg-[#0A4C76] hover:bg-[#083d5f]"
+                    : "text-[#0A4C76] bg-[#0A4C76]/10 hover:bg-[#0A4C76]/20"
+                ]}
+              >
+                Заказать
+              </a>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Process -->
+    <section class="py-24 bg-gray-50">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-16">
+          <span class="inline-block px-4 py-2 bg-[#0A4C76]/10 text-[#0A4C76] font-medium rounded-full text-sm mb-4">
+            Процесс
+          </span>
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+            Как это работает
+          </h2>
+        </div>
+
+        <div class="grid md:grid-cols-4 gap-8 max-w-5xl mx-auto">
+          <div class="text-center">
+            <div class="w-12 h-12 mx-auto mb-4 rounded-full bg-[#0A4C76] flex items-center justify-center text-white font-bold">1</div>
+            <h3 class="font-semibold text-gray-900 mb-2">Загрузите проект</h3>
+            <p class="text-gray-600 text-sm">Из Studio, ПланоCAD или внешний файл</p>
+          </div>
+          <div class="text-center">
+            <div class="w-12 h-12 mx-auto mb-4 rounded-full bg-[#0A4C76] flex items-center justify-center text-white font-bold">2</div>
+            <h3 class="font-semibold text-gray-900 mb-2">Выберите пакет</h3>
+            <p class="text-gray-600 text-sm">СПОЗУ, эскизный или полный проект</p>
+          </div>
+          <div class="text-center">
+            <div class="w-12 h-12 mx-auto mb-4 rounded-full bg-[#0A4C76] flex items-center justify-center text-white font-bold">3</div>
+            <h3 class="font-semibold text-gray-900 mb-2">AI генерирует</h3>
+            <p class="text-gray-600 text-sm">Автоматическое создание документов</p>
+          </div>
+          <div class="text-center">
+            <div class="w-12 h-12 mx-auto mb-4 rounded-full bg-[#92CF93] flex items-center justify-center text-white font-bold">4</div>
+            <h3 class="font-semibold text-gray-900 mb-2">Скачайте готовое</h3>
+            <p class="text-gray-600 text-sm">PDF, DWG, DXF — любой формат</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <ProductCTA
+      title="Получите документацию за минуты"
+      description="Загрузите проект — получите готовый комплект документов для строительства."
+      primaryCta={{ text: 'Создать документы', href: 'https://studio.planometrica.pro/docs' }}
+      secondaryCta={{ text: 'Консультация', href: 'mailto:hello@planometrica.pro' }}
+    />
+  </main>
+</Layout>

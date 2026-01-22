@@ -1,0 +1,144 @@
+@import "tailwindcss";
+
+/* Planometrica Design System CSS Variables */
+@layer base {
+  :root {
+    /* Background & Foreground */
+    --background: 0 0% 100%;
+    --foreground: 203 83% 25%;
+
+    /* Card */
+    --card: 0 0% 100%;
+    --card-foreground: 203 83% 25%;
+
+    /* Popover */
+    --popover: 0 0% 100%;
+    --popover-foreground: 203 83% 25%;
+
+    /* Primary - Planometrica Brand Blue */
+    --primary: 203 83% 25%;
+    --primary-foreground: 200 100% 97%;
+
+    /* Secondary */
+    --secondary: 200 100% 97%;
+    --secondary-foreground: 203 83% 25%;
+
+    /* Muted */
+    --muted: 200 100% 97%;
+    --muted-foreground: 215 16% 47%;
+
+    /* Accent */
+    --accent: 200 100% 97%;
+    --accent-foreground: 203 83% 25%;
+
+    /* Destructive */
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    /* Border, Input, Ring */
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 203 83% 25%;
+
+    /* Radius */
+    --radius: 0.5rem;
+
+    /* Sidebar */
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 203 83% 25%;
+    --sidebar-primary: 203 83% 25%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 200 100% 97%;
+    --sidebar-accent-foreground: 203 83% 25%;
+    --sidebar-border: 214 32% 91%;
+    --sidebar-ring: 203 83% 25%;
+  }
+
+  .dark {
+    /* Background & Foreground */
+    --background: 222 47% 11%;
+    --foreground: 210 40% 98%;
+
+    /* Card */
+    --card: 222 47% 15%;
+    --card-foreground: 210 40% 98%;
+
+    /* Popover */
+    --popover: 222 47% 15%;
+    --popover-foreground: 210 40% 98%;
+
+    /* Primary */
+    --primary: 217 91% 60%;
+    --primary-foreground: 222 47% 11%;
+
+    /* Secondary */
+    --secondary: 217 33% 25%;
+    --secondary-foreground: 210 40% 98%;
+
+    /* Muted */
+    --muted: 217 33% 25%;
+    --muted-foreground: 215 20% 65%;
+
+    /* Accent */
+    --accent: 217 33% 25%;
+    --accent-foreground: 210 40% 98%;
+
+    /* Destructive */
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 210 40% 98%;
+
+    /* Border, Input, Ring */
+    --border: 217 33% 25%;
+    --input: 217 33% 25%;
+    --ring: 217 91% 60%;
+
+    /* Sidebar - Dark */
+    --sidebar-background: 240 6% 10%;
+    --sidebar-foreground: 240 5% 96%;
+    --sidebar-primary: 224 76% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 4% 16%;
+    --sidebar-accent-foreground: 240 5% 96%;
+    --sidebar-border: 240 4% 16%;
+    --sidebar-ring: 217 91% 60%;
+  }
+}
+
+@layer base {
+  * {
+    border-color: hsl(var(--border));
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: 'Inter', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-width: 320px;
+  }
+
+  ::selection {
+    background-color: hsl(var(--primary) / 0.2);
+    color: hsl(var(--foreground));
+  }
+}
+
+/* Brand Colors */
+@theme {
+  --color-primary: #0A4C76;
+  --color-primary-foreground: #ffffff;
+  --color-secondary: #1A7BB3;
+  --color-secondary-foreground: #ffffff;
+  --color-accent: #92CF93;
+  --color-accent-foreground: #1a1918;
+  --color-warning: #F59E0B;
+
+  --font-family-sans: 'Inter', system-ui, sans-serif;
+  --font-family-logo: 'Aileron', 'Inter', sans-serif;
+  --font-family-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
