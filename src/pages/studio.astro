@@ -4,7 +4,14 @@ import ProductHero from '../components/ProductHero.astro'
 import ProductFeatures from '../components/ProductFeatures.astro'
 import ProductCTA from '../components/ProductCTA.astro'
 
-const features = [
+// Sanity imports
+import { getProductBySlug } from '../lib/sanity'
+
+// Fetch product data from Sanity
+const product = await getProductBySlug('studio')
+
+// Default features (fallback)
+const defaultFeatures = [
   {
     icon: `<svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
       <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
@@ -83,8 +90,9 @@ const workflowSteps = [
 >
   <main>
     <ProductHero
+      product={product}
       badge="Флагманский продукт"
-      title="Planometrica Studio"
+      title="Планометрика Studio"
       subtitle="Полный цикл проектирования дома"
       description="От первоначальной концепции до готовой рабочей документации. Единая платформа с AI-инструментами для архитекторов и проектировщиков."
       primaryCta={{ text: 'Начать проект', href: 'https://studio.planometrica.pro/register' }}
@@ -93,10 +101,11 @@ const workflowSteps = [
     />
 
     <ProductFeatures
+      product={product}
       badge="Возможности"
       title="Всё для проектирования ИЖС"
       subtitle="Полный набор инструментов в единой платформе"
-      features={features}
+      features={defaultFeatures}
     />
 
     <!-- Workflow Section -->
@@ -266,6 +275,7 @@ const workflowSteps = [
     </section>
 
     <ProductCTA
+      product={product}
       title="Готовы начать проектирование?"
       description="Создайте первый проект бесплатно. Без кредитной карты, без обязательств."
       primaryCta={{ text: 'Создать проект', href: 'https://studio.planometrica.pro/register' }}

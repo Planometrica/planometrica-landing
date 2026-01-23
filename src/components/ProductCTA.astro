@@ -1,18 +1,38 @@
 ---
+import type { Product as SanityProduct, CTA } from '../lib/sanity'
+
 interface Props {
-  title: string
-  description: string
-  primaryCta: {
-    text: string
-    href: string
-  }
-  secondaryCta?: {
-    text: string
-    href: string
-  }
+  product?: SanityProduct | null
+  title?: string
+  description?: string
+  primaryCta?: CTA | { text: string; href: string }
+  secondaryCta?: CTA | { text: string; href: string }
 }
 
-const { title, description, primaryCta, secondaryCta } = Astro.props
+const {
+  product,
+  title: propsTitle,
+  description: propsDescription,
+  primaryCta: propsPrimaryCta,
+  secondaryCta: propsSecondaryCta
+} = Astro.props
+
+// Merge product data with props (props override product data)
+const title = propsTitle || 'Готовы начать?'
+const description = propsDescription || 'Начните использовать продукт прямо сейчас.'
+
+// Handle CTA - convert Sanity CTA to component format
+const primaryCta = propsPrimaryCta
+  ? ('href' in propsPrimaryCta ? propsPrimaryCta : { text: propsPrimaryCta.text || '', href: propsPrimaryCta.link || '#' })
+  : product?.primaryCta
+    ? { text: product.primaryCta.text || 'Начать', href: product.primaryCta.link || product.productUrl || '#' }
+    : { text: 'Начать', href: '#' }
+
+const secondaryCta = propsSecondaryCta
+  ? ('href' in propsSecondaryCta ? propsSecondaryCta : { text: propsSecondaryCta.text || '', href: propsSecondaryCta.link || '#' })
+  : product?.secondaryCta
+    ? { text: product.secondaryCta.text || '', href: product.secondaryCta.link || '#' }
+    : undefined
 ---
 
 <section class="py-24 bg-gradient-to-br from-[#0A4C76] via-[#1A7BB3] to-[#0A4C76] relative overflow-hidden">

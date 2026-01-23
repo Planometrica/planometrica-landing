@@ -10,6 +10,26 @@ import PricingPreview from '../components/PricingPreview.astro'
 import ArchitecturalStyles from '../components/ArchitecturalStyles.astro'
 import CTA from '../components/CTA.astro'
 
+// Sanity imports
+import {
+  getHeroByName,
+  getFeatures,
+  getProducts,
+  getTestimonials,
+  getStats,
+  getPricing
+} from '../lib/sanity'
+
+// Fetch data from Sanity (all in parallel)
+const [hero, features, products, testimonials, stats, pricing] = await Promise.all([
+  getHeroByName('home-hero'),
+  getFeatures(),
+  getProducts(),
+  getTestimonials(),
+  getStats(),
+  getPricing()
+])
+
 const seoData = {
   title: 'Планометрика — AI проектирование дома онлайн',
   description: 'Создайте проект дома за 30 минут с AI-архитектором. Автоматическая проверка норм, подбор ипотеки, визуализация. Начните бесплатно!',
@@ -27,28 +47,31 @@ const seoData = {
 >
   <main>
     <!-- Hero Section -->
-    <Hero />
+    <Hero hero={hero} />
 
-    <!-- Problem/Solution: Why Planometrica -->
+    <!-- Problem/Solution: Why Планометрика -->
     <ProblemSolution />
 
     <!-- How It Works: 4 Steps -->
     <HowItWorks />
 
     <!-- Features Grid -->
-    <Features />
+    <Features features={features.length > 0 ? features : undefined} />
 
     <!-- Products Showcase -->
-    <Products />
+    <Products products={products.length > 0 ? products : undefined} />
 
     <!-- Architectural Styles -->
     <ArchitecturalStyles />
 
     <!-- Testimonials Carousel -->
-    <Testimonials />
+    <Testimonials
+      testimonials={testimonials.length > 0 ? testimonials : undefined}
+      metrics={stats.length > 0 ? stats : undefined}
+    />
 
     <!-- Pricing Preview -->
-    <PricingPreview />
+    <PricingPreview tiers={pricing.length > 0 ? pricing : undefined} />
 
     <!-- Final CTA -->
     <CTA />

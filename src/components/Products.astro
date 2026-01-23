@@ -1,6 +1,22 @@
 ---
-// Products section
-const products = [
+import type { Product as SanityProduct } from '../lib/sanity'
+
+interface LocalProduct {
+  name: string
+  description: string
+  url: string
+  features: string[]
+  color: string
+}
+
+interface Props {
+  products?: SanityProduct[] | LocalProduct[] | null
+  badge?: string
+  title?: string
+  subtitle?: string
+}
+
+const defaultProducts: LocalProduct[] = [
   {
     name: 'PlanoCAD',
     description: 'Профессиональный CAD-редактор для создания планировок. Интуитивный интерфейс, умные инструменты, интеграция с AI.',
@@ -9,20 +25,43 @@ const products = [
     color: 'from-[#0A4C76] to-[#1A7BB3]'
   },
   {
-    name: 'Planometrica Studio',
+    name: 'Планометрика Studio',
     description: 'Полнофункциональная студия для проектирования. Создавайте проекты домов от концепции до рабочей документации.',
     url: 'https://studio.planometrica.pro',
     features: ['Полный цикл проектирования', '3D визуализация', 'Генерация документации', 'Командная работа'],
     color: 'from-[#1A7BB3] to-[#92CF93]'
   },
   {
-    name: 'Planometrica Sandbox',
+    name: 'Планометрика Sandbox',
     description: 'Экспериментальная площадка для тестирования новых AI-инструментов. Пробуйте функции до их релиза.',
     url: 'https://sandbox.planometrica.pro',
     features: ['Бета-функции', 'AI эксперименты', 'Ранний доступ', 'Обратная связь'],
     color: 'from-[#92CF93] to-[#6BB86D]'
   }
 ]
+
+const {
+  products: propsProducts,
+  badge = 'Наши продукты',
+  title = 'Экосистема Планометрика',
+  subtitle = 'Набор инструментов для любых задач проектирования — от быстрых скетчей до полной проектной документации'
+} = Astro.props
+
+// Convert Sanity products to display format
+const products = propsProducts?.map(p => {
+  // Handle both Sanity and local product formats
+  if ('productUrl' in p) {
+    // Sanity product
+    return {
+      name: p.name,
+      description: p.description || p.tagline || '',
+      url: p.productUrl || '#',
+      features: p.featureBadges || [],
+      color: p.gradient || 'from-[#0A4C76] to-[#1A7BB3]'
+    }
+  }
+  return p
+}) || defaultProducts
 ---
 
 <section id="products" class="py-24 bg-white">
@@ -30,13 +69,13 @@ const products = [
     <!-- Section Header -->
     <div class="text-center mb-16">
       <span class="inline-block px-4 py-2 bg-[#92CF93]/20 text-[#1A7BB3] font-medium rounded-full text-sm mb-4">
-        Наши продукты
+        {badge}
       </span>
       <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-        Экосистема Planometrica
+        {title}
       </h2>
       <p class="text-xl text-gray-600 max-w-2xl mx-auto">
-        Набор инструментов для любых задач проектирования — от быстрых скетчей до полной проектной документации
+        {subtitle}
       </p>
     </div>
 
