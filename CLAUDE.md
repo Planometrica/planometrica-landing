@@ -75,3 +75,68 @@ src/
 **Production:** https://planometrica.ru (planned)
 
 **GitHub Secrets:** STAGING_HOST, STAGING_USER, STAGING_SSH_KEY
+
+## Sanity CMS Integration
+
+**Блог и FAQ управляются через Sanity CMS.**
+
+### Конфигурация
+
+| Параметр | Значение |
+|----------|----------|
+| Project ID | `xdm8bhqx` |
+| Dataset | `production` |
+| Studio | `../cms-planometrica` |
+
+### ENV Variables
+
+```env
+PUBLIC_SANITY_PROJECT_ID=xdm8bhqx
+PUBLIC_SANITY_DATASET=production
+```
+
+### Структура `src/lib/sanity/`
+
+```
+src/lib/sanity/
+├── client.ts   # Sanity client (@sanity/client)
+├── queries.ts  # GROQ queries (posts, faq)
+├── types.ts    # TypeScript типы (Post, FAQ, Author)
+├── schemas.ts  # Zod schemas для валидации
+└── index.ts    # Re-exports
+```
+
+### Основные GROQ Queries
+
+```groq
+// Все посты
+*[_type == "post"] | order(publishedAt desc)
+
+// Пост по slug
+*[_type == "post" && slug.current == $slug][0]
+
+// FAQ по категории
+*[_type == "faq" && category == $category] | order(order asc)
+```
+
+### Workflow с CMS
+
+1. **Редактирование контента:**
+   ```bash
+   cd ../cms-planometrica
+   npm run dev  # http://localhost:3333
+   ```
+
+2. **Публикация изменений:**
+   - Сделай изменения в Sanity Studio
+   - Нажми **Publish**
+   - Задеплой landing:
+   ```bash
+   ./deploy-staging.sh
+   ```
+
+### Связанные файлы
+
+- **CMS Studio:** `../cms-planometrica/`
+- **Схемы контента:** `../cms-planometrica/schemaTypes/`
+- **README CMS:** `../cms-planometrica/README.md`
