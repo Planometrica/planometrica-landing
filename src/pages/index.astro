@@ -5,6 +5,7 @@ import ProblemSolution from '../components/ProblemSolution.astro'
 import HowItWorks from '../components/HowItWorks.astro'
 import Features from '../components/Features.astro'
 import Products from '../components/Products.astro'
+import Audiences from '../components/Audiences.astro'
 import Testimonials from '../components/Testimonials.astro'
 import PricingPreview from '../components/PricingPreview.astro'
 import ArchitecturalStyles from '../components/ArchitecturalStyles.astro'
@@ -60,6 +61,9 @@ const seoData = {
 
     <!-- Products Showcase -->
     <Products products={products.length > 0 ? products : undefined} />
+
+    <!-- Audiences: For Whom -->
+    <Audiences />
 
     <!-- Architectural Styles -->
     <ArchitecturalStyles />
