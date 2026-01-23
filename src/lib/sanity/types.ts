@@ -45,8 +45,29 @@ export interface SiteSettings {
     youtube?: string
     github?: string
   }
-  footerText?: string
+  footerBrandDescription?: string
+  footerCopyright?: string
+  footerMadeWith?: string
   analyticsId?: string
+}
+
+// ============================================
+// FOOTER NAVIGATION
+// ============================================
+
+export interface FooterNavLink {
+  _key: string
+  name: string
+  href: string
+  external?: boolean
+}
+
+export interface FooterNavigation {
+  _id: string
+  section: 'products' | 'resources' | 'company' | 'legal'
+  title: string
+  order?: number
+  links?: FooterNavLink[]
 }
 
 // ============================================

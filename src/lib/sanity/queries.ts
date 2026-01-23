@@ -1,7 +1,7 @@
 import { sanityClient, isSanityConfigured } from './client'
-import type { 
-  BlogPost, 
-  FAQItem, 
+import type {
+  BlogPost,
+  FAQItem,
   FAQCategory,
   SiteSettings,
   Page,
@@ -10,7 +10,8 @@ import type {
   Feature,
   Testimonial,
   Stat,
-  Pricing
+  Pricing,
+  FooterNavigation
 } from './types'
 
 // ============================================
@@ -45,7 +46,9 @@ const siteSettingsQuery = `*[_type == "siteSettings"][0] {
   ogImage { ${imageFragment} },
   contactEmail,
   social,
-  footerText,
+  footerBrandDescription,
+  footerCopyright,
+  footerMadeWith,
   analyticsId
 }`
 
@@ -56,6 +59,33 @@ export async function getSiteSettings(): Promise<SiteSettings | null> {
   } catch (error) {
     console.error('Error fetching site settings:', error)
     return null
+  }
+}
+
+// ============================================
+// FOOTER NAVIGATION QUERIES
+// ============================================
+
+const footerNavigationQuery = `*[_type == "footerNavigation"] | order(order asc) {
+  _id,
+  section,
+  title,
+  order,
+  links[] {
+    _key,
+    name,
+    href,
+    external
+  }
+}`
+
+export async function getFooterNavigation(): Promise<FooterNavigation[]> {
+  if (!isSanityConfigured()) return []
+  try {
+    return await sanityClient.fetch<FooterNavigation[]>(footerNavigationQuery)
+  } catch (error) {
+    console.error('Error fetching footer navigation:', error)
+    return []
   }
 }
 

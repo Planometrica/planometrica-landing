@@ -2,9 +2,11 @@
 export { sanityClient, urlFor, isSanityConfigured } from './client'
 
 // Queries
-export { 
+export {
   // Site Settings
   getSiteSettings,
+  // Footer Navigation
+  getFooterNavigation,
   // Pages
   getPageBySlug,
   // Hero
@@ -39,6 +41,9 @@ export type {
   CTA,
   // Site Settings
   SiteSettings,
+  // Footer Navigation
+  FooterNavigation,
+  FooterNavLink,
   // Pages
   SEO,
   Page,
