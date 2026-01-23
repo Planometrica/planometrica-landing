@@ -1,16 +1,56 @@
 ---
 import Layout from '../layouts/Layout.astro'
 import Hero from '../components/Hero.astro'
+import ProblemSolution from '../components/ProblemSolution.astro'
+import HowItWorks from '../components/HowItWorks.astro'
 import Features from '../components/Features.astro'
 import Products from '../components/Products.astro'
+import Testimonials from '../components/Testimonials.astro'
+import PricingPreview from '../components/PricingPreview.astro'
+import ArchitecturalStyles from '../components/ArchitecturalStyles.astro'
 import CTA from '../components/CTA.astro'
+
+const seoData = {
+  title: 'Планометрика — AI проектирование дома онлайн',
+  description: 'Создайте проект дома за 30 минут с AI-архитектором. Автоматическая проверка норм, подбор ипотеки, визуализация. Начните бесплатно!',
+  keywords: 'проект дома, проектирование дома, AI архитектор, планировка дома, ИЖС проект, строительство дома',
+  ogImage: '/images/og-home.jpg'
+}
 ---
 
-<Layout title="Planometrica — Проектирование домов с ИИ" transparentHeader={true}>
+<Layout
+  title={seoData.title}
+  description={seoData.description}
+  keywords={seoData.keywords}
+  ogImage={seoData.ogImage}
+  transparentHeader={true}
+>
   <main>
+    <!-- Hero Section -->
     <Hero />
+
+    <!-- Problem/Solution: Why Planometrica -->
+    <ProblemSolution />
+
+    <!-- How It Works: 4 Steps -->
+    <HowItWorks />
+
+    <!-- Features Grid -->
     <Features />
+
+    <!-- Products Showcase -->
     <Products />
+
+    <!-- Architectural Styles -->
+    <ArchitecturalStyles />
+
+    <!-- Testimonials Carousel -->
+    <Testimonials />
+
+    <!-- Pricing Preview -->
+    <PricingPreview />
+
+    <!-- Final CTA -->
     <CTA />
   </main>
 </Layout>

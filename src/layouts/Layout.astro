@@ -6,6 +6,9 @@ import Footer from '../components/Footer.astro'
 interface Props {
   title: string
   description?: string
+  keywords?: string
+  ogImage?: string
+  canonical?: string
   transparentHeader?: boolean
   hideHeader?: boolean
   hideFooter?: boolean
@@ -14,10 +17,17 @@ interface Props {
 const {
   title,
   description = 'Planometrica — B2B платформа для проектирования индивидуальных жилых домов с AI-powered инструментами',
+  keywords,
+  ogImage = '/images/og-default.jpg',
+  canonical,
   transparentHeader = false,
   hideHeader = false,
   hideFooter = false
 } = Astro.props
+
+const siteUrl = 'https://planometrica.pro'
+const canonicalUrl = canonical ? `${siteUrl}${canonical}` : Astro.url.href
+const ogImageUrl = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`
 ---
 
 <!doctype html>
@@ -26,7 +36,9 @@ const {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
+    {keywords && <meta name="keywords" content={keywords} />}
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href={canonicalUrl} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -37,12 +49,20 @@ const {
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Planometrica" />
+    <meta property="og:site_name" content="Планометрика" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:locale" content="ru_RU" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+
+    <!-- Additional SEO -->
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="Планометрика" />
   </head>
   <body class="min-h-screen antialiased bg-white text-gray-900">
     {!hideHeader && <Header transparent={transparentHeader} />}
