@@ -1,110 +1,172 @@
 ---
 import Layout from '../layouts/Layout.astro'
+import { getFAQByCategories, isSanityConfigured } from '../lib/sanity'
+import type { FAQCategory } from '../lib/sanity'
 
-const faqCategories = [
+// Fallback FAQ data for development / when Sanity is not configured
+const fallbackCategories: FAQCategory[] = [
   {
     name: 'Общие вопросы',
-    questions: [
+    items: [
       {
+        _id: '1',
+        _createdAt: '',
         question: 'Что такое Planometrica?',
-        answer: 'Planometrica — это платформа для проектирования индивидуальных жилых домов. Мы объединяем AI-инструменты для генерации планировок, профессиональный CAD-редактор, визуализацию и автоматическую генерацию документации.'
+        answer: 'Planometrica — это платформа для проектирования индивидуальных жилых домов. Мы объединяем AI-инструменты для генерации планировок, профессиональный CAD-редактор, визуализацию и автоматическую генерацию документации.',
+        category: 'general'
       },
       {
+        _id: '2',
+        _createdAt: '',
         question: 'Для кого подходит Planometrica?',
-        answer: 'Платформа подходит для всех участников рынка ИЖС: частных застройщиков, архитекторов, строительных компаний, риелторов. У нас есть инструменты как для тех, кто впервые строит дом, так и для профессионалов.'
+        answer: 'Платформа подходит для всех участников рынка ИЖС: частных застройщиков, архитекторов, строительных компаний, риелторов. У нас есть инструменты как для тех, кто впервые строит дом, так и для профессионалов.',
+        category: 'general'
       },
       {
+        _id: '3',
+        _createdAt: '',
         question: 'Можно ли использовать бесплатно?',
-        answer: 'Да, базовый функционал доступен бесплатно: генерация планировок, работа в CAD-редакторе, экспорт в PDF. Расширенные возможности (AI-рендер, экспорт в DXF/DWG, командная работа) доступны по подписке.'
+        answer: 'Да, базовый функционал доступен бесплатно: генерация планировок, работа в CAD-редакторе, экспорт в PDF. Расширенные возможности (AI-рендер, экспорт в DXF/DWG, командная работа) доступны по подписке.',
+        category: 'general'
       }
     ]
   },
   {
     name: 'Planometrica Studio',
-    questions: [
+    items: [
       {
+        _id: '4',
+        _createdAt: '',
         question: 'Что входит в Planometrica Studio?',
-        answer: 'Studio — это полный цикл проектирования: от выбора участка до готовой документации. Включает НейроПлан (AI-генерация), ПланоCAD (редактирование), AI-Рендер (визуализация), модуль документов (СПОЗУ, проектный пакет) и калькулятор ипотеки.'
+        answer: 'Studio — это полный цикл проектирования: от выбора участка до готовой документации. Включает НейроПлан (AI-генерация), ПланоCAD (редактирование), AI-Рендер (визуализация), модуль документов (СПОЗУ, проектный пакет) и калькулятор ипотеки.',
+        category: 'studio'
       },
       {
+        _id: '5',
+        _createdAt: '',
         question: 'Как работает AI-генерация планировок?',
-        answer: 'Вы описываете требования текстом («двухэтажный дом 150 м², 3 спальни, гараж») или загружаете эскиз. AI анализирует запрос и генерирует несколько вариантов планировки с учётом строительных норм (СНиП, инсоляция, пожарные требования).'
+        answer: 'Вы описываете требования текстом («двухэтажный дом 150 м², 3 спальни, гараж») или загружаете эскиз. AI анализирует запрос и генерирует несколько вариантов планировки с учётом строительных норм (СНиП, инсоляция, пожарные требования).',
+        category: 'studio'
       },
       {
+        _id: '6',
+        _createdAt: '',
         question: 'Сколько вариантов планировки генерируется?',
-        answer: 'Обычно AI создаёт 3-5 вариантов с разной компоновкой. Вы можете выбрать лучший или попросить доработать понравившийся вариант.'
+        answer: 'Обычно AI создаёт 3-5 вариантов с разной компоновкой. Вы можете выбрать лучший или попросить доработать понравившийся вариант.',
+        category: 'studio'
       }
     ]
   },
   {
     name: 'ПланоCAD',
-    questions: [
+    items: [
       {
+        _id: '7',
+        _createdAt: '',
         question: 'Чем ПланоCAD отличается от AutoCAD?',
-        answer: 'ПланоCAD — это специализированный CAD-редактор для планировок домов, который работает в браузере. Не требует установки, имеет интуитивный интерфейс и встроенную библиотеку элементов (двери, окна, мебель, сантехника).'
+        answer: 'ПланоCAD — это специализированный CAD-редактор для планировок домов, который работает в браузере. Не требует установки, имеет интуитивный интерфейс и встроенную библиотеку элементов (двери, окна, мебель, сантехника).',
+        category: 'planocad'
       },
       {
+        _id: '8',
+        _createdAt: '',
         question: 'Можно ли экспортировать в DXF/DWG?',
-        answer: 'Да, экспорт в DXF и DWG доступен в тарифах Профи и Команда. Также доступен экспорт в PDF, PNG, SVG.'
+        answer: 'Да, экспорт в DXF и DWG доступен в тарифах Профи и Команда. Также доступен экспорт в PDF, PNG, SVG.',
+        category: 'planocad'
       },
       {
+        _id: '9',
+        _createdAt: '',
         question: 'Работает ли ПланоCAD на планшете?',
-        answer: 'Да, ПланоCAD полностью адаптирован для работы на планшетах. Поддерживается touch-управление и стилус.'
+        answer: 'Да, ПланоCAD полностью адаптирован для работы на планшетах. Поддерживается touch-управление и стилус.',
+        category: 'planocad'
       }
     ]
   },
   {
     name: 'AI-Рендер',
-    questions: [
+    items: [
       {
+        _id: '10',
+        _createdAt: '',
         question: 'Как быстро создаётся рендер?',
-        answer: 'AI-рендер создаёт фотореалистичную визуализацию за 10-30 секунд. Это в сотни раз быстрее традиционного рендеринга.'
+        answer: 'AI-рендер создаёт фотореалистичную визуализацию за 10-30 секунд. Это в сотни раз быстрее традиционного рендеринга.',
+        category: 'render'
       },
       {
+        _id: '11',
+        _createdAt: '',
         question: 'Какое качество изображений?',
-        answer: 'AI генерирует изображения в разрешении до 4K. Качество достаточно для презентаций, маркетинговых материалов и согласования с заказчиком.'
+        answer: 'AI генерирует изображения в разрешении до 4K. Качество достаточно для презентаций, маркетинговых материалов и согласования с заказчиком.',
+        category: 'render'
       },
       {
+        _id: '12',
+        _createdAt: '',
         question: 'Можно ли выбрать стиль интерьера?',
-        answer: 'Да, доступна библиотека стилей: современный, скандинавский, классический, лофт, хай-тек, прованс и другие. Также можно настроить время суток (день, закат, ночь).'
+        answer: 'Да, доступна библиотека стилей: современный, скандинавский, классический, лофт, хай-тек, прованс и другие. Также можно настроить время суток (день, закат, ночь).',
+        category: 'render'
       }
     ]
   },
   {
     name: 'Документы и СПОЗУ',
-    questions: [
+    items: [
       {
+        _id: '13',
+        _createdAt: '',
         question: 'Что такое СПОЗУ и зачем она нужна?',
-        answer: 'СПОЗУ (Схема планировочной организации земельного участка) — обязательный документ для уведомления о начале строительства ИЖС. На ней показывается расположение дома на участке с учётом отступов и зон.'
+        answer: 'СПОЗУ (Схема планировочной организации земельного участка) — обязательный документ для уведомления о начале строительства ИЖС. На ней показывается расположение дома на участке с учётом отступов и зон.',
+        category: 'docs'
       },
       {
+        _id: '14',
+        _createdAt: '',
         question: 'Соответствуют ли документы нормам?',
-        answer: 'Да, все документы генерируются с учётом актуальных СНиП, Градостроительного кодекса и местных нормативов. AI проверяет соответствие при создании.'
+        answer: 'Да, все документы генерируются с учётом актуальных СНиП, Градостроительного кодекса и местных нормативов. AI проверяет соответствие при создании.',
+        category: 'docs'
       },
       {
+        _id: '15',
+        _createdAt: '',
         question: 'В каком формате предоставляются документы?',
-        answer: 'Документы доступны в PDF для печати и согласования, а также в редактируемых форматах (DWG, DXF) для доработки в специализированных программах.'
+        answer: 'Документы доступны в PDF для печати и согласования, а также в редактируемых форматах (DWG, DXF) для доработки в специализированных программах.',
+        category: 'docs'
       }
     ]
   },
   {
     name: 'Оплата и тарифы',
-    questions: [
+    items: [
       {
+        _id: '16',
+        _createdAt: '',
         question: 'Какие есть тарифы?',
-        answer: 'Три основных тарифа: Старт (бесплатно) — базовый функционал, Профи (2 990 ₽/мес) — полный доступ для индивидуального использования, Команда (по запросу) — для компаний с командной работой.'
+        answer: 'Три основных тарифа: Старт (бесплатно) — базовый функционал, Профи (2 990 ₽/мес) — полный доступ для индивидуального использования, Команда (по запросу) — для компаний с командной работой.',
+        category: 'pricing'
       },
       {
+        _id: '17',
+        _createdAt: '',
         question: 'Есть ли пробный период?',
-        answer: 'Да, для тарифа Профи доступен 14-дневный пробный период. Регистрация без карты.'
+        answer: 'Да, для тарифа Профи доступен 14-дневный пробный период. Регистрация без карты.',
+        category: 'pricing'
       },
       {
+        _id: '18',
+        _createdAt: '',
         question: 'Как оплатить?',
-        answer: 'Принимаем оплату картами Visa, MasterCard, МИР. Для юрлиц доступна оплата по счёту.'
+        answer: 'Принимаем оплату картами Visa, MasterCard, МИР. Для юрлиц доступна оплата по счёту.',
+        category: 'pricing'
       }
     ]
   }
 ]
+
+// Fetch from Sanity or use fallback
+const sanityCategories = await getFAQByCategories()
+const faqCategories = sanityCategories.length > 0 ? sanityCategories : fallbackCategories
+const usingSanity = isSanityConfigured() && sanityCategories.length > 0
 ---
 
 <Layout
@@ -128,6 +190,11 @@ const faqCategories = [
           <p class="text-xl text-gray-600">
             Ответы на популярные вопросы о платформе, функционале и тарифах
           </p>
+          {!usingSanity && (
+            <p class="text-sm text-gray-400 mt-4">
+              Показаны демо-данные. Подключите Sanity для управления контентом.
+            </p>
+          )}
         </div>
       </div>
     </section>
@@ -142,6 +209,7 @@ const faqCategories = [
             </svg>
             <input
               type="text"
+              id="faq-search"
               placeholder="Поиск по вопросам..."
               class="w-full pl-12 pr-4 py-4 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#0A4C76]/20 focus:border-[#0A4C76]"
             />
@@ -153,16 +221,21 @@ const faqCategories = [
     <!-- FAQ Sections -->
     <section class="py-16 bg-white">
       <div class="container mx-auto px-4">
-        <div class="max-w-4xl mx-auto">
+        <div class="max-w-4xl mx-auto" id="faq-container">
           {faqCategories.map((category, categoryIndex) => (
-            <div class="mb-12">
+            <div class="mb-12 faq-category" data-category={category.name}>
               <h2 class="text-2xl font-bold text-gray-900 mb-6 pb-3 border-b border-gray-200">
                 {category.name}
               </h2>
 
               <div class="space-y-4">
-                {category.questions.map((item, index) => (
-                  <details class="group bg-gray-50 rounded-xl" open={categoryIndex === 0 && index === 0}>
+                {category.items.map((item, index) => (
+                  <details
+                    class="group bg-gray-50 rounded-xl faq-item"
+                    data-question={item.question.toLowerCase()}
+                    data-answer={item.answer.toLowerCase()}
+                    open={categoryIndex === 0 && index === 0}
+                  >
                     <summary class="flex items-center justify-between cursor-pointer p-6 list-none">
                       <h3 class="text-lg font-medium text-gray-900 pr-8">
                         {item.question}
@@ -280,3 +353,49 @@ const faqCategories = [
     </section>
   </main>
 </Layout>
+
+<script>
+  // Simple FAQ search functionality
+  document.addEventListener('DOMContentLoaded', () => {
+    const searchInput = document.getElementById('faq-search') as HTMLInputElement
+    const faqItems = document.querySelectorAll('.faq-item')
+    const faqCategories = document.querySelectorAll('.faq-category')
+
+    if (!searchInput) return
+
+    searchInput.addEventListener('input', () => {
+      const query = searchInput.value.toLowerCase().trim()
+
+      if (!query) {
+        // Show all items
+        faqItems.forEach(item => {
+          (item as HTMLElement).style.display = ''
+        })
+        faqCategories.forEach(cat => {
+          (cat as HTMLElement).style.display = ''
+        })
+        return
+      }
+
+      // Filter items
+      faqCategories.forEach(category => {
+        const items = category.querySelectorAll('.faq-item')
+        let hasVisibleItems = false
+
+        items.forEach(item => {
+          const question = item.getAttribute('data-question') || ''
+          const answer = item.getAttribute('data-answer') || ''
+          const matches = question.includes(query) || answer.includes(query)
+
+          ;(item as HTMLElement).style.display = matches ? '' : 'none'
+          if (matches) {
+            hasVisibleItems = true
+            ;(item as HTMLDetailsElement).open = true
+          }
+        })
+
+        ;(category as HTMLElement).style.display = hasVisibleItems ? '' : 'none'
+      })
+    })
+  })
+</script>

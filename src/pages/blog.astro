@@ -1,64 +1,93 @@
 ---
 import Layout from '../layouts/Layout.astro'
+import { getBlogPosts, urlFor, isSanityConfigured } from '../lib/sanity'
+import type { BlogPost } from '../lib/sanity'
 
-const posts = [
+// Fallback posts for development / when Sanity is not configured
+const fallbackPosts = [
   {
-    slug: 'kak-poluchit-razreshenie-na-stroitelstvo',
+    _id: '1',
+    slug: { current: 'kak-poluchit-razreshenie-na-stroitelstvo' },
     title: 'Как получить разрешение на строительство в 2026 году',
     excerpt: 'Подробный гайд по получению уведомления о начале строительства ИЖС. Какие документы нужны, куда подавать, сроки рассмотрения.',
-    category: 'Документы',
-    date: '2026-01-15',
-    readTime: '8 мин',
-    image: '/blog/razreshenie.jpg'
+    categories: ['docs'],
+    publishedAt: '2026-01-15',
+    readTime: 8
   },
   {
-    slug: 'vybor-materiala-sten',
+    _id: '2',
+    slug: { current: 'vybor-materiala-sten' },
     title: 'Выбор материала стен: газобетон vs кирпич vs каркас',
     excerpt: 'Сравнение популярных материалов для строительства дома. Плюсы, минусы, стоимость, теплопроводность.',
-    category: 'Строительство',
-    date: '2026-01-10',
-    readTime: '12 мин',
-    image: '/blog/materialy.jpg'
+    categories: ['construction'],
+    publishedAt: '2026-01-10',
+    readTime: 12
   },
   {
-    slug: 'planirovka-doma-oshibki',
+    _id: '3',
+    slug: { current: 'planirovka-doma-oshibki' },
     title: '10 ошибок при планировке дома, которых легко избежать',
     excerpt: 'Разбираем типичные ошибки: неудобное зонирование, недостаток розеток, проблемы с инсоляцией и как их предотвратить.',
-    category: 'Проектирование',
-    date: '2026-01-05',
-    readTime: '10 мин',
-    image: '/blog/oshibki.jpg'
+    categories: ['design'],
+    publishedAt: '2026-01-05',
+    readTime: 10
   },
   {
-    slug: 'ipoteka-na-stroitelstvo-2026',
+    _id: '4',
+    slug: { current: 'ipoteka-na-stroitelstvo-2026' },
     title: 'Ипотека на строительство дома: условия банков в 2026',
     excerpt: 'Обзор ипотечных программ для ИЖС: ставки, первоначальный взнос, требования к заёмщику и участку.',
-    category: 'Финансы',
-    date: '2025-12-28',
-    readTime: '15 мин',
-    image: '/blog/ipoteka.jpg'
+    categories: ['mortgage'],
+    publishedAt: '2025-12-28',
+    readTime: 15
   },
   {
-    slug: 'ai-v-proektirovanii',
+    _id: '5',
+    slug: { current: 'ai-v-proektirovanii' },
     title: 'Как AI меняет проектирование домов',
     excerpt: 'Обзор AI-инструментов в архитектуре: генерация планировок, рендеринг, автоматизация документации.',
-    category: 'Технологии',
-    date: '2025-12-20',
-    readTime: '7 мин',
-    image: '/blog/ai.jpg'
+    categories: ['ai'],
+    publishedAt: '2025-12-20',
+    readTime: 7
   },
   {
-    slug: 'energoeffektivnyj-dom',
+    _id: '6',
+    slug: { current: 'energoeffektivnyj-dom' },
     title: 'Энергоэффективный дом: от проекта до реализации',
     excerpt: 'Как спроектировать и построить дом с минимальными затратами на отопление. Утепление, окна, вентиляция.',
-    category: 'Строительство',
-    date: '2025-12-15',
-    readTime: '14 мин',
-    image: '/blog/energo.jpg'
+    categories: ['construction'],
+    publishedAt: '2025-12-15',
+    readTime: 14
   }
-]
+] as BlogPost[]
 
-const categories = ['Все', 'Проектирование', 'Строительство', 'Документы', 'Финансы', 'Технологии']
+// Fetch from Sanity or use fallback
+const sanityPosts = await getBlogPosts()
+const posts = sanityPosts.length > 0 ? sanityPosts : fallbackPosts
+const usingSanity = isSanityConfigured() && sanityPosts.length > 0
+
+// Category mapping
+const categoryLabels: Record<string, string> = {
+  design: 'Проектирование',
+  construction: 'Строительство',
+  docs: 'Документы',
+  mortgage: 'Ипотека',
+  ai: 'Технологии',
+  news: 'Новости'
+}
+
+const categories = ['Все', 'Проектирование', 'Строительство', 'Документы', 'Ипотека', 'Технологии']
+
+function formatDate(dateStr: string): string {
+  const date = new Date(dateStr)
+  return date.toLocaleDateString('ru-RU', { year: 'numeric', month: 'long', day: 'numeric' })
+}
+
+function getCategoryLabel(categories?: string[]): string {
+  if (!categories || categories.length === 0) return 'Статья'
+  const cat = categories[0]
+  return categoryLabels[cat] || cat
+}
 ---
 
 <Layout
@@ -82,6 +111,11 @@ const categories = ['Все', 'Проектирование', 'Строител�
           <p class="text-xl text-gray-600">
             Гайды, советы экспертов, обзоры технологий — всё для тех, кто планирует строить свой дом
           </p>
+          {!usingSanity && (
+            <p class="text-sm text-gray-400 mt-4">
+              Показаны демо-данные. Подключите Sanity для управления контентом.
+            </p>
+          )}
         </div>
       </div>
     </section>
@@ -98,6 +132,7 @@ const categories = ['Все', 'Проектирование', 'Строител�
                   ? "bg-[#0A4C76] text-white"
                   : "bg-gray-100 text-gray-700 hover:bg-gray-200"
               ]}
+              data-category={category}
             >
               {category}
             </button>
@@ -111,22 +146,34 @@ const categories = ['Все', 'Проектирование', 'Строител�
       <div class="container mx-auto px-4">
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {posts.map((post) => (
-            <article class="group">
-              <a href={`/blog/${post.slug}`} class="block">
-                <!-- Image placeholder -->
+            <article class="group" data-categories={JSON.stringify(post.categories)}>
+              <a href={`/blog/${post.slug.current}`} class="block">
+                <!-- Image -->
                 <div class="aspect-video bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl mb-4 overflow-hidden">
-                  <div class="w-full h-full flex items-center justify-center text-gray-400 text-sm group-hover:scale-105 transition-transform duration-300">
-                    {post.title.slice(0, 20)}...
-                  </div>
+                  {post.mainImage ? (
+                    <img
+                      src={urlFor(post.mainImage).width(600).height(340).url()}
+                      alt={post.mainImage.alt || post.title}
+                      class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                  ) : (
+                    <div class="w-full h-full flex items-center justify-center text-gray-400 text-sm group-hover:scale-105 transition-transform duration-300 bg-gradient-to-br from-[#0A4C76]/10 to-[#1A7BB3]/10">
+                      <svg class="w-12 h-12 text-[#0A4C76]/30" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                      </svg>
+                    </div>
+                  )}
                 </div>
 
                 <!-- Category & Date -->
                 <div class="flex items-center gap-3 mb-3">
                   <span class="px-3 py-1 bg-[#92CF93]/20 text-[#1A7BB3] text-xs font-medium rounded-full">
-                    {post.category}
+                    {getCategoryLabel(post.categories)}
                   </span>
-                  <span class="text-gray-400 text-sm">{post.date}</span>
-                  <span class="text-gray-400 text-sm">· {post.readTime}</span>
+                  <span class="text-gray-400 text-sm">{formatDate(post.publishedAt)}</span>
+                  {post.readTime && (
+                    <span class="text-gray-400 text-sm">· {post.readTime} мин</span>
+                  )}
                 </div>
 
                 <!-- Title -->
