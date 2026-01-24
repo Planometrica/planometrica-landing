@@ -1,6 +1,6 @@
 ---
 interface Props {
-  badge: string
+  badge?: string
   title: string
   subtitle: string
   description: string
@@ -37,9 +37,11 @@ const {
   <div class="relative z-10 container mx-auto px-4">
     <div class="max-w-4xl mx-auto text-center">
       <!-- Badge -->
-      <div class="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full border border-white/20 mb-8">
-        <span class="text-white/90 text-sm font-medium">{badge}</span>
-      </div>
+      {badge && (
+        <div class="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full border border-white/20 mb-8">
+          <span class="text-white/90 text-sm font-medium">{badge}</span>
+        </div>
+      )}
 
       <!-- Title -->
       <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 tracking-tight">

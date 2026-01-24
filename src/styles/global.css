@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-/* Planometrica Design System CSS Variables */
+/* Планометрика Design System CSS Variables */
 @layer base {
   :root {
     /* Background & Foreground */
@@ -15,7 +15,7 @@
     --popover: 0 0% 100%;
     --popover-foreground: 203 83% 25%;
 
-    /* Primary - Planometrica Brand Blue */
+    /* Primary - Планометрика Brand Blue */
     --primary: 203 83% 25%;
     --primary-foreground: 200 100% 97%;
 
