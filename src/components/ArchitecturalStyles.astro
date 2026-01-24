@@ -11,14 +11,16 @@ interface Props {
 }
 
 const defaultStyles: Style[] = [
-  { name: 'Современный', description: 'Минимализм, плоские крыши, панорамные окна' },
+  { name: 'Классика', description: 'Симметрия, колонны, лепнина' },
   { name: 'Скандинавский', description: 'Светлые фасады, дерево, уют' },
-  { name: 'Классический', description: 'Симметрия, колонны, лепнина' },
+  { name: 'Минимализм', description: 'Чистые линии, плоские крыши, панорамные окна' },
   { name: 'Барнхаус', description: 'Амбарный стиль, металл, высокие потолки' },
+  { name: 'A-Frame', description: 'Треугольная форма, крыша до земли' },
+  { name: 'Фахверк', description: 'Немецкий стиль, каркас, традиции' },
   { name: 'Шале', description: 'Альпийский стиль, дерево, камень' },
   { name: 'Хай-тек', description: 'Стекло, металл, технологичность' },
-  { name: 'Прованс', description: 'Французская деревня, пастельные тона' },
-  { name: 'Фахверк', description: 'Немецкий стиль, каркас, традиции' }
+  { name: 'Русский/Изба', description: 'Традиционный сруб, резные наличники' },
+  { name: 'Прованс', description: 'Французская деревня, пастельные тона' }
 ]
 
 const { styles = defaultStyles } = Astro.props
@@ -28,10 +30,12 @@ const defaultColors = [
   'from-blue-400 to-blue-600',
   'from-gray-600 to-gray-800',
   'from-amber-600 to-amber-800',
-  'from-green-500 to-emerald-700',
+  'from-teal-500 to-teal-700',
   'from-stone-500 to-stone-700',
+  'from-green-500 to-emerald-700',
   'from-sky-400 to-cyan-600',
-  'from-slate-600 to-slate-800',
+  'from-red-600 to-red-800',
+  'from-purple-400 to-purple-600',
 ]
 ---
 
@@ -43,7 +47,7 @@ const defaultColors = [
         Архитектурные стили
       </span>
       <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-        8 стилей на любой вкус
+        10 стилей на любой вкус
       </h2>
       <p class="text-lg text-gray-600 max-w-2xl mx-auto">
         Выберите архитектурный стиль, и НейроПлан сгенерирует варианты планировок именно в нём
@@ -52,7 +56,7 @@ const defaultColors = [
 
     <!-- Styles Grid -->
     <div class="max-w-6xl mx-auto">
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 lg:gap-6">
+      <div class="grid grid-cols-2 md:grid-cols-5 gap-4 lg:gap-6">
         {styles.map((style, index) => (
           <div class="group relative overflow-hidden rounded-2xl aspect-[4/3] cursor-pointer">
             {/* Background gradient */}
