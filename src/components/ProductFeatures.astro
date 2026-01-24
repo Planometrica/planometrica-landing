@@ -1,38 +1,25 @@
 ---
-import type { Feature as SanityFeature, Product as SanityProduct } from '../lib/sanity'
-
-interface LocalFeature {
+interface Feature {
   icon: string
   title: string
   description: string
 }
 
 interface Props {
-  product?: SanityProduct | null
   badge?: string
-  title?: string
+  title: string
   subtitle?: string
-  features?: SanityFeature[] | LocalFeature[]
+  features: Feature[]
   columns?: 2 | 3
 }
 
 const {
-  product,
-  badge: propsBadge,
-  title: propsTitle,
-  subtitle: propsSubtitle,
-  features: propsFeatures,
+  badge,
+  title,
+  subtitle,
+  features,
   columns = 3
 } = Astro.props
-
-// Merge product data with props
-const badge = propsBadge
-const title = propsTitle || 'Возможности'
-const subtitle = propsSubtitle
-const features = propsFeatures || product?.features || []
-
-// Helper to get icon from feature
-const getIcon = (feature: any) => feature.icon || ''
 
 const gridClass = columns === 2 ? 'lg:grid-cols-2' : 'lg:grid-cols-3'
 ---
@@ -61,7 +48,7 @@ const gridClass = columns === 2 ? 'lg:grid-cols-2' : 'lg:grid-cols-3'
       {features.map((feature) => (
         <div class="bg-white rounded-2xl p-8 shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 group">
           <div class="w-14 h-14 bg-[#0A4C76]/10 rounded-xl flex items-center justify-center text-[#0A4C76] mb-6 group-hover:bg-[#0A4C76] group-hover:text-white transition-colors duration-300">
-            <Fragment set:html={getIcon(feature)} />
+            <Fragment set:html={feature.icon} />
           </div>
           <h3 class="text-xl font-semibold text-gray-900 mb-3">
             {feature.title}

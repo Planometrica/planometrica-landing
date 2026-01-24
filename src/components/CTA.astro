@@ -1,42 +1,5 @@
 ---
-import type { CTASection } from '../lib/sanity'
-
-interface Props {
-  cta?: CTASection | null
-  title?: string
-  description?: string
-  primaryCtaText?: string
-  primaryCtaLink?: string
-  secondaryCtaText?: string
-  secondaryCtaLink?: string
-}
-
-const defaultCTA = {
-  title: 'Готовы начать проектирование?',
-  description: 'Присоединяйтесь к сотням архитекторов и строительных компаний, которые уже используют Планометрика для создания проектов домов.',
-  primaryCtaText: 'Создать аккаунт бесплатно',
-  primaryCtaLink: 'https://studio.planometrica.pro/register',
-  secondaryCtaText: 'Связаться с нами',
-  secondaryCtaLink: 'mailto:hello@planometrica.pro'
-}
-
-const {
-  cta,
-  title: propsTitle,
-  description: propsDescription,
-  primaryCtaText: propsPrimaryText,
-  primaryCtaLink: propsPrimaryLink,
-  secondaryCtaText: propsSecondaryText,
-  secondaryCtaLink: propsSecondaryLink
-} = Astro.props
-
-// Merge CTA section with props and defaults
-const ctaTitle = cta?.title || propsTitle || defaultCTA.title
-const ctaDescription = cta?.description || propsDescription || defaultCTA.description
-const primaryText = cta?.primaryCtaText || propsPrimaryText || defaultCTA.primaryCtaText
-const primaryLink = cta?.primaryCtaLink || propsPrimaryLink || defaultCTA.primaryCtaLink
-const secondaryText = cta?.secondaryCtaText || propsSecondaryText || defaultCTA.secondaryCtaText
-const secondaryLink = cta?.secondaryCtaLink || propsSecondaryLink || defaultCTA.secondaryCtaLink
+// Call to Action section
 ---
 
 <section class="py-24 bg-gradient-to-br from-[#0A4C76] via-[#1A7BB3] to-[#0A4C76] relative overflow-hidden">
@@ -49,30 +12,28 @@ const secondaryLink = cta?.secondaryCtaLink || propsSecondaryLink || defaultCTA.
   <div class="container mx-auto px-4 relative z-10">
     <div class="max-w-4xl mx-auto text-center">
       <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6">
-        {ctaTitle}
+        Готовы начать проектирование?
       </h2>
       <p class="text-xl text-white/80 mb-10 max-w-2xl mx-auto">
-        {ctaDescription}
+        Присоединяйтесь к сотням архитекторов и строительных компаний, которые уже используют Planometrica для создания проектов домов.
       </p>
 
       <div class="flex flex-col sm:flex-row gap-4 justify-center mb-12">
         <a
-          href={primaryLink}
+          href="https://studio.planometrica.pro/register"
           class="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-[#0A4C76] bg-white rounded-xl hover:bg-gray-100 transition-all duration-200 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
         >
-          {primaryText}
+          Создать аккаунт бесплатно
           <svg class="ml-2 w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
           </svg>
         </a>
-        {secondaryText && secondaryLink && (
-          <a
-            href={secondaryLink}
-            class="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-white bg-white/10 backdrop-blur-sm border border-white/30 rounded-xl hover:bg-white/20 transition-all duration-200"
-          >
-            {secondaryText}
-          </a>
-        )}
+        <a
+          href="mailto:hello@planometrica.pro"
+          class="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-white bg-white/10 backdrop-blur-sm border border-white/30 rounded-xl hover:bg-white/20 transition-all duration-200"
+        >
+          Связаться с нами
+        </a>
       </div>
 
       <!-- Trust badges -->

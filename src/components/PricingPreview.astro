@@ -1,7 +1,5 @@
 ---
-import type { Pricing as SanityPricing } from '../lib/sanity'
-
-interface LocalPricingTier {
+interface PricingTier {
   name: string
   badge?: string
   price: string
@@ -13,12 +11,10 @@ interface LocalPricingTier {
 }
 
 interface Props {
-  tiers?: SanityPricing[] | LocalPricingTier[] | null
-  badge?: string
-  title?: string
+  tiers?: PricingTier[]
 }
 
-const defaultTiers: LocalPricingTier[] = [
+const defaultTiers: PricingTier[] = [
   {
     name: 'Старт',
     price: 'Бесплатно',
@@ -62,29 +58,7 @@ const defaultTiers: LocalPricingTier[] = [
   }
 ]
 
-const {
-  tiers: propsTiers,
-  badge = 'Тарифы',
-  title = 'Простые и понятные тарифы'
-} = Astro.props
-
-// Convert Sanity pricing to display format or use local format
-const tiers = propsTiers?.map(t => {
-  if ('ctaLink' in t) {
-    // Sanity pricing
-    return {
-      name: t.name,
-      badge: t.badge,
-      price: t.price,
-      priceNote: t.period === 'month' ? '/месяц' : t.period === 'year' ? '/год' : undefined,
-      features: t.features || [],
-      ctaText: t.ctaText || 'Выбрать',
-      ctaHref: t.ctaLink || '#',
-      highlighted: t.highlighted
-    }
-  }
-  return t
-}) || defaultTiers
+const { tiers = defaultTiers } = Astro.props
 ---
 
 <section class="py-20 lg:py-28 bg-white">
@@ -92,10 +66,10 @@ const tiers = propsTiers?.map(t => {
     <!-- Header -->
     <div class="text-center mb-16">
       <span class="inline-block px-4 py-2 bg-[#0A4C76]/10 text-[#0A4C76] font-medium rounded-full text-sm mb-4">
-        {badge}
+        Тарифы
       </span>
       <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-        {title}
+        Простые и понятные тарифы
       </h2>
     </div>
 

@@ -1,50 +1,31 @@
 ---
-import type { Product as SanityProduct, CTA } from '../lib/sanity'
-
 interface Props {
-  product?: SanityProduct | null
-  badge?: string
-  title?: string
-  subtitle?: string
-  description?: string
-  primaryCta?: CTA | { text: string; href: string }
-  secondaryCta?: CTA | { text: string; href: string }
+  badge: string
+  title: string
+  subtitle: string
+  description: string
+  primaryCta: {
+    text: string
+    href: string
+  }
+  secondaryCta?: {
+    text: string
+    href: string
+  }
   gradient?: string
   features?: string[]
 }
 
 const {
-  product,
-  badge: propsBadge,
-  title: propsTitle,
-  subtitle: propsSubtitle,
-  description: propsDescription,
-  primaryCta: propsPrimaryCta,
-  secondaryCta: propsSecondaryCta,
-  gradient: propsGradient,
-  features: propsFeatures
+  badge,
+  title,
+  subtitle,
+  description,
+  primaryCta,
+  secondaryCta,
+  gradient = 'from-[#0A4C76] via-[#1A7BB3] to-[#0A4C76]',
+  features = []
 } = Astro.props
-
-// Merge product data with props (props override product data)
-const badge = propsBadge || (product?.name ? `Продукт` : 'Продукт')
-const title = propsTitle || product?.name || 'Название продукта'
-const subtitle = propsSubtitle || product?.tagline || ''
-const description = propsDescription || product?.description || ''
-const gradient = propsGradient || product?.gradient || 'from-[#0A4C76] via-[#1A7BB3] to-[#0A4C76]'
-const features = propsFeatures || product?.featureBadges || []
-
-// Handle CTA - convert Sanity CTA to component format
-const primaryCta = propsPrimaryCta
-  ? ('href' in propsPrimaryCta ? propsPrimaryCta : { text: propsPrimaryCta.text || '', href: propsPrimaryCta.link || '#' })
-  : product?.primaryCta
-    ? { text: product.primaryCta.text || 'Начать', href: product.primaryCta.link || product.productUrl || '#' }
-    : { text: 'Начать', href: '#' }
-
-const secondaryCta = propsSecondaryCta
-  ? ('href' in propsSecondaryCta ? propsSecondaryCta : { text: propsSecondaryCta.text || '', href: propsSecondaryCta.link || '#' })
-  : product?.secondaryCta
-    ? { text: product.secondaryCta.text || '', href: product.secondaryCta.link || '#' }
-    : undefined
 ---
 
 <section class={`relative pt-32 pb-20 lg:pt-40 lg:pb-32 overflow-hidden bg-gradient-to-br ${gradient}`}>

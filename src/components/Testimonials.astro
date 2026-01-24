@@ -1,7 +1,5 @@
 ---
-import type { Testimonial as SanityTestimonial, Stat as SanityStat } from '../lib/sanity'
-
-interface LocalTestimonial {
+interface Testimonial {
   quote: string
   name: string
   role: string
@@ -9,19 +7,17 @@ interface LocalTestimonial {
   avatar?: string
 }
 
-interface LocalMetric {
+interface Metric {
   value: string
   label: string
 }
 
 interface Props {
-  testimonials?: SanityTestimonial[] | LocalTestimonial[] | null
-  metrics?: SanityStat[] | LocalMetric[] | null
-  badge?: string
-  title?: string
+  testimonials?: Testimonial[]
+  metrics?: Metric[]
 }
 
-const defaultTestimonials: LocalTestimonial[] = [
+const defaultTestimonials: Testimonial[] = [
   {
     quote: 'Сделали проект дома за вечер! Раньше ждали бы месяц от архитектора. AI-планировки реально работают.',
     name: 'Алексей Петров',
@@ -42,22 +38,14 @@ const defaultTestimonials: LocalTestimonial[] = [
   }
 ]
 
-const defaultMetrics: LocalMetric[] = [
+const defaultMetrics: Metric[] = [
   { value: '2,500+', label: 'Проектов создано' },
   { value: '30 мин', label: 'Среднее время' },
   { value: '98%', label: 'Довольных клиентов' },
   { value: '15+', label: 'Регионов России' }
 ]
 
-const {
-  testimonials: propsTestimonials,
-  metrics: propsMetrics,
-  badge = 'Отзывы',
-  title = 'Что говорят наши пользователи'
-} = Astro.props
-
-const testimonials = propsTestimonials || defaultTestimonials
-const metrics = propsMetrics || defaultMetrics
+const { testimonials = defaultTestimonials, metrics = defaultMetrics } = Astro.props
 ---
 
 <section class="py-20 lg:py-28 bg-gradient-to-b from-white to-gray-50">
@@ -65,10 +53,10 @@ const metrics = propsMetrics || defaultMetrics
     <!-- Header -->
     <div class="text-center mb-16">
       <span class="inline-block px-4 py-2 bg-[#92CF93]/20 text-[#0A4C76] font-medium rounded-full text-sm mb-4">
-        {badge}
+        Отзывы
       </span>
       <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900">
-        {title}
+        Что говорят наши пользователи
       </h2>
     </div>
 

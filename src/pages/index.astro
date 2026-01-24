@@ -5,31 +5,10 @@ import ProblemSolution from '../components/ProblemSolution.astro'
 import HowItWorks from '../components/HowItWorks.astro'
 import Features from '../components/Features.astro'
 import Products from '../components/Products.astro'
-import Audiences from '../components/Audiences.astro'
 import Testimonials from '../components/Testimonials.astro'
 import PricingPreview from '../components/PricingPreview.astro'
 import ArchitecturalStyles from '../components/ArchitecturalStyles.astro'
 import CTA from '../components/CTA.astro'
-
-// Sanity imports
-import {
-  getHeroByName,
-  getFeatures,
-  getProducts,
-  getTestimonials,
-  getStats,
-  getPricing
-} from '../lib/sanity'
-
-// Fetch data from Sanity (all in parallel)
-const [hero, features, products, testimonials, stats, pricing] = await Promise.all([
-  getHeroByName('home-hero'),
-  getFeatures(),
-  getProducts(),
-  getTestimonials(),
-  getStats(),
-  getPricing()
-])
 
 const seoData = {
   title: 'Планометрика — AI проектирование дома онлайн',
@@ -48,34 +27,28 @@ const seoData = {
 >
   <main>
     <!-- Hero Section -->
-    <Hero hero={hero} />
+    <Hero />
 
-    <!-- Problem/Solution: Why Планометрика -->
+    <!-- Problem/Solution: Why Planometrica -->
     <ProblemSolution />
 
     <!-- How It Works: 4 Steps -->
     <HowItWorks />
 
     <!-- Features Grid -->
-    <Features features={features.length > 0 ? features : undefined} />
+    <Features />
 
     <!-- Products Showcase -->
-    <Products products={products.length > 0 ? products : undefined} />
-
-    <!-- Audiences: For Whom -->
-    <Audiences />
+    <Products />
 
     <!-- Architectural Styles -->
     <ArchitecturalStyles />
 
     <!-- Testimonials Carousel -->
-    <Testimonials
-      testimonials={testimonials.length > 0 ? testimonials : undefined}
-      metrics={stats.length > 0 ? stats : undefined}
-    />
+    <Testimonials />
 
     <!-- Pricing Preview -->
-    <PricingPreview tiers={pricing.length > 0 ? pricing : undefined} />
+    <PricingPreview />
 
     <!-- Final CTA -->
     <CTA />

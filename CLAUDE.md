@@ -41,8 +41,10 @@ src/
     ├── render.astro        # Planometrica Render
     ├── mortgage.astro      # Ипотечный калькулятор
     ├── docs.astro          # Документация
-    ├── blog.astro          # Блог
-    └── faq.astro           # FAQ
+    ├── blog/
+    │   ├── index.astro     # Список статей (CMS)
+    │   └── [slug].astro    # Страница статьи (CMS)
+    └── faq.astro           # FAQ (CMS)
 ```
 
 ## Design System
