@@ -57,14 +57,18 @@ const faqItemsQuery = `*[_type == "faq"] | order(category asc, order asc) {
 
 export async function getBlogPosts(): Promise<BlogPost[]> {
   if (!isSanityConfigured()) {
-    console.log('Sanity not configured, using fallback data')
+    if (import.meta.env.DEV) {
+      console.log('Sanity not configured, using fallback data')
+    }
     return []
   }
 
   try {
     return await sanityClient.fetch<BlogPost[]>(blogPostsQuery)
   } catch (error) {
-    console.error('Error fetching blog posts:', error)
+    if (import.meta.env.DEV) {
+      console.error('Error fetching blog posts:', error)
+    }
     return []
   }
 }
@@ -77,21 +81,27 @@ export async function getBlogPostBySlug(slug: string): Promise<BlogPost | null> 
   try {
     return await sanityClient.fetch<BlogPost>(blogPostBySlugQuery, { slug })
   } catch (error) {
-    console.error('Error fetching blog post:', error)
+    if (import.meta.env.DEV) {
+      console.error('Error fetching blog post:', error)
+    }
     return null
   }
 }
 
 export async function getFAQItems(): Promise<FAQItem[]> {
   if (!isSanityConfigured()) {
-    console.log('Sanity not configured, using fallback data')
+    if (import.meta.env.DEV) {
+      console.log('Sanity not configured, using fallback data')
+    }
     return []
   }
 
   try {
     return await sanityClient.fetch<FAQItem[]>(faqItemsQuery)
   } catch (error) {
-    console.error('Error fetching FAQ items:', error)
+    if (import.meta.env.DEV) {
+      console.error('Error fetching FAQ items:', error)
+    }
     return []
   }
 }

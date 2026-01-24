@@ -1,3 +1,5 @@
+import type { PortableTextBlock } from '@portabletext/types'
+
 // Blog Post type
 export interface BlogPost {
   _id: string
@@ -19,7 +21,7 @@ export interface BlogPost {
     }
   }
   publishedAt: string
-  body?: any[] // Portable Text
+  body?: PortableTextBlock[]
   readTime?: number
 }
 

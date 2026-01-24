@@ -1,4 +1,60 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, Component, type ReactNode } from 'react'
+
+// Константы для лимитов калькулятора
+const LOAN_LIMITS = {
+  AMOUNT: { MIN: 1_000_000, MAX: 30_000_000, STEP: 100_000 },
+  RATE: { MIN: 3, MAX: 20, STEP: 0.1 },
+  TERM: { MIN: 1, MAX: 30, STEP: 1 },
+} as const
+
+// Error Boundary для graceful error handling
+interface ErrorBoundaryState {
+  hasError: boolean
+  error?: Error
+}
+
+class MortgageErrorBoundary extends Component<
+  { children: ReactNode },
+  ErrorBoundaryState
+> {
+  constructor(props: { children: ReactNode }) {
+    super(props)
+    this.state = { hasError: false }
+  }
+
+  static getDerivedStateFromError(error: Error): ErrorBoundaryState {
+    return { hasError: true, error }
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return (
+        <section className="py-20 lg:py-28 bg-gradient-to-br from-[#0A4C76] to-[#1A7BB3]">
+          <div className="container mx-auto px-4">
+            <div className="max-w-xl mx-auto text-center">
+              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8">
+                <h2 className="text-2xl font-bold text-white mb-4">
+                  Калькулятор временно недоступен
+                </h2>
+                <p className="text-white/70 mb-6">
+                  Попробуйте обновить страницу или вернуться позже.
+                </p>
+                <button
+                  onClick={() => window.location.reload()}
+                  className="px-6 py-3 bg-white text-[#0A4C76] font-semibold rounded-xl hover:bg-gray-100 transition-colors"
+                >
+                  Обновить страницу
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+      )
+    }
+
+    return this.props.children
+  }
+}
 
 interface MortgageCalculatorProps {
   defaultAmount?: number
@@ -6,8 +62,8 @@ interface MortgageCalculatorProps {
   defaultTerm?: number
 }
 
-export default function MortgageCalculator({
-  defaultAmount = 5000000,
+function MortgageCalculatorInner({
+  defaultAmount = 5_000_000,
   defaultRate = 6,
   defaultTerm = 20
 }: MortgageCalculatorProps) {
@@ -72,16 +128,16 @@ export default function MortgageCalculator({
                   </div>
                   <input
                     type="range"
-                    min={1000000}
-                    max={30000000}
-                    step={100000}
+                    min={LOAN_LIMITS.AMOUNT.MIN}
+                    max={LOAN_LIMITS.AMOUNT.MAX}
+                    step={LOAN_LIMITS.AMOUNT.STEP}
                     value={amount}
                     onChange={(e) => setAmount(Number(e.target.value))}
                     className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-[#0A4C76]"
                   />
                   <div className="flex justify-between mt-1 text-xs text-gray-500">
-                    <span>1 млн</span>
-                    <span>30 млн</span>
+                    <span>{formatNumber(LOAN_LIMITS.AMOUNT.MIN / 1_000_000)} млн</span>
+                    <span>{formatNumber(LOAN_LIMITS.AMOUNT.MAX / 1_000_000)} млн</span>
                   </div>
                 </div>
 
@@ -97,16 +153,16 @@ export default function MortgageCalculator({
                   </div>
                   <input
                     type="range"
-                    min={3}
-                    max={20}
-                    step={0.1}
+                    min={LOAN_LIMITS.RATE.MIN}
+                    max={LOAN_LIMITS.RATE.MAX}
+                    step={LOAN_LIMITS.RATE.STEP}
                     value={rate}
                     onChange={(e) => setRate(Number(e.target.value))}
                     className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-[#0A4C76]"
                   />
                   <div className="flex justify-between mt-1 text-xs text-gray-500">
-                    <span>3%</span>
-                    <span>20%</span>
+                    <span>{LOAN_LIMITS.RATE.MIN}%</span>
+                    <span>{LOAN_LIMITS.RATE.MAX}%</span>
                   </div>
                 </div>
 
@@ -122,16 +178,16 @@ export default function MortgageCalculator({
                   </div>
                   <input
                     type="range"
-                    min={1}
-                    max={30}
-                    step={1}
+                    min={LOAN_LIMITS.TERM.MIN}
+                    max={LOAN_LIMITS.TERM.MAX}
+                    step={LOAN_LIMITS.TERM.STEP}
                     value={term}
                     onChange={(e) => setTerm(Number(e.target.value))}
                     className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-[#0A4C76]"
                   />
                   <div className="flex justify-between mt-1 text-xs text-gray-500">
-                    <span>1 год</span>
-                    <span>30 лет</span>
+                    <span>{LOAN_LIMITS.TERM.MIN} год</span>
+                    <span>{LOAN_LIMITS.TERM.MAX} лет</span>
                   </div>
                 </div>
               </div>
@@ -188,5 +244,14 @@ export default function MortgageCalculator({
         </div>
       </div>
     </section>
+  )
+}
+
+// Wrapper с Error Boundary для безопасного использования
+export default function MortgageCalculator(props: MortgageCalculatorProps) {
+  return (
+    <MortgageErrorBoundary>
+      <MortgageCalculatorInner {...props} />
+    </MortgageErrorBoundary>
   )
 }

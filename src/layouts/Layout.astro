@@ -25,7 +25,7 @@ const {
   hideFooter = false
 } = Astro.props
 
-const siteUrl = 'https://planometrica.pro'
+const siteUrl = import.meta.env.PUBLIC_SITE_URL || 'https://planometrica.pro'
 const canonicalUrl = canonical ? `${siteUrl}${canonical}` : Astro.url.href
 const ogImageUrl = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`
 ---
@@ -41,7 +41,7 @@ const ogImageUrl = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`
     <link rel="canonical" href={canonicalUrl} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
 

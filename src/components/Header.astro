@@ -31,6 +31,7 @@ const isActive = (href: string) => currentPath === href || currentPath.startsWit
     transparent ? "bg-transparent" : "bg-white/95 backdrop-blur-md shadow-sm"
   ]}
   id="main-header"
+  data-transparent={transparent ? 'true' : 'false'}
 >
   <nav class="container mx-auto px-4">
     <div class="flex items-center justify-between h-16 lg:h-20">
@@ -268,14 +269,21 @@ const isActive = (href: string) => currentPath === href || currentPath.startsWit
   const header = document.getElementById('main-header')
 
   if (header?.dataset.transparent === 'true') {
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 50) {
+    const updateHeaderStyles = () => {
+      const isScrolled = window.scrollY > 50
+
+      if (isScrolled) {
         header.classList.remove('bg-transparent')
         header.classList.add('bg-white/95', 'backdrop-blur-md', 'shadow-sm')
+        header.dataset.scrolled = 'true'
       } else {
         header.classList.add('bg-transparent')
         header.classList.remove('bg-white/95', 'backdrop-blur-md', 'shadow-sm')
+        header.dataset.scrolled = 'false'
       }
-    })
+    }
+
+    window.addEventListener('scroll', updateHeaderStyles, { passive: true })
+    updateHeaderStyles() // Initial check
   }
 </script>

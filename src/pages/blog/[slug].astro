@@ -1,6 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro'
 import { getBlogPosts, getBlogPostBySlug, urlFor } from '../../lib/sanity'
+import { toHTML } from '@portabletext/to-html'
 
 export async function getStaticPaths() {
   const posts = await getBlogPosts()
@@ -10,7 +11,13 @@ export async function getStaticPaths() {
 }
 
 const { slug } = Astro.params
-const post = await getBlogPostBySlug(slug as string)
+
+// Валидация slug
+if (!slug || !/^[a-z0-9-]+$/i.test(slug)) {
+  return Astro.redirect('/blog')
+}
+
+const post = await getBlogPostBySlug(slug)
 
 if (!post) {
   return Astro.redirect('/blog')
@@ -33,51 +40,49 @@ const formatDate = (dateStr: string) => {
 const getCategoryLabel = (categories?: string[]) => {
   if (!categories || categories.length === 0) return 'Статья'
   const cat = categories[0]
-  return (categoryLabels as any)[cat] || cat
+  return categoryLabels[cat as keyof typeof categoryLabels] || cat
 }
 
-const renderPortableText = (blocks: any[]) => {
-  if (!blocks || !Array.isArray(blocks)) return ''
-
-  return blocks.map(block => {
-    if (block._type === 'block') {
-      const children = block.children?.map((child: any) => {
-        let text = child.text || ''
-        if (child.marks?.includes('strong')) text = `<strong>${text}</strong>`
-        if (child.marks?.includes('em')) text = `<em>${text}</em>`
-        if (child.marks?.includes('code')) text = `<code>${text}</code>`
-        return text
-      }).join('') || ''
-
-      switch (block.style) {
-        case 'h1': return `<h1 class="text-3xl font-bold mt-8 mb-4">${children}</h1>`
-        case 'h2': return `<h2 class="text-2xl font-bold mt-8 mb-4">${children}</h2>`
-        case 'h3': return `<h3 class="text-xl font-bold mt-6 mb-3">${children}</h3>`
-        case 'h4': return `<h4 class="text-lg font-semibold mt-4 mb-2">${children}</h4>`
-        case 'blockquote': return `<blockquote class="border-l-4 border-[#0A4C76] pl-4 my-4 italic text-gray-600">${children}</blockquote>`
-        default:
-          if (block.listItem === 'bullet') {
-            return `<li class="ml-6 list-disc">${children}</li>`
-          }
-          if (block.listItem === 'number') {
-            return `<li class="ml-6 list-decimal">${children}</li>`
-          }
-          return children ? `<p class="mb-4 leading-relaxed">${children}</p>` : ''
-      }
+// Безопасный рендеринг Portable Text с @portabletext/to-html
+const portableTextComponents = {
+  types: {
+    image: ({ value }: { value: { asset?: { _ref: string }, alt?: string, caption?: string } }) => {
+      if (!value?.asset) return ''
+      const imageUrl = urlFor(value).width(800).url()
+      const alt = value.alt || ''
+      const caption = value.caption || ''
+      return `<figure class="my-8"><img src="${imageUrl}" alt="${alt}" class="rounded-xl w-full" loading="lazy" />${caption ? `<figcaption class="text-center text-sm text-gray-500 mt-2">${caption}</figcaption>` : ''}</figure>`
     }
-
-    if (block._type === 'image' && block.asset) {
-      const imageUrl = urlFor(block).width(800).url()
-      const alt = block.alt || ''
-      const caption = block.caption || ''
-      return `<figure class="my-8"><img src="${imageUrl}" alt="${alt}" class="rounded-xl w-full" />${caption ? `<figcaption class="text-center text-sm text-gray-500 mt-2">${caption}</figcaption>` : ''}</figure>`
+  },
+  block: {
+    h1: ({ children }: { children?: string }) => `<h1 class="text-3xl font-bold mt-8 mb-4">${children}</h1>`,
+    h2: ({ children }: { children?: string }) => `<h2 class="text-2xl font-bold mt-8 mb-4">${children}</h2>`,
+    h3: ({ children }: { children?: string }) => `<h3 class="text-xl font-bold mt-6 mb-3">${children}</h3>`,
+    h4: ({ children }: { children?: string }) => `<h4 class="text-lg font-semibold mt-4 mb-2">${children}</h4>`,
+    blockquote: ({ children }: { children?: string }) => `<blockquote class="border-l-4 border-[#0A4C76] pl-4 my-4 italic text-gray-600">${children}</blockquote>`,
+    normal: ({ children }: { children?: string }) => children ? `<p class="mb-4 leading-relaxed">${children}</p>` : '',
+  },
+  list: {
+    bullet: ({ children }: { children?: string }) => `<ul class="list-disc ml-6 mb-4 space-y-2">${children}</ul>`,
+    number: ({ children }: { children?: string }) => `<ol class="list-decimal ml-6 mb-4 space-y-2">${children}</ol>`,
+  },
+  listItem: {
+    bullet: ({ children }: { children?: string }) => `<li>${children}</li>`,
+    number: ({ children }: { children?: string }) => `<li>${children}</li>`,
+  },
+  marks: {
+    strong: ({ children }: { children?: string }) => `<strong>${children}</strong>`,
+    em: ({ children }: { children?: string }) => `<em>${children}</em>`,
+    code: ({ children }: { children?: string }) => `<code class="bg-gray-100 px-1 py-0.5 rounded text-sm">${children}</code>`,
+    link: ({ value, children }: { value?: { href?: string }, children?: string }) => {
+      const href = value?.href || '#'
+      const isExternal = href.startsWith('http')
+      return `<a href="${href}" class="text-[#0A4C76] hover:underline"${isExternal ? ' target="_blank" rel="noopener noreferrer"' : ''}>${children}</a>`
     }
-
-    return ''
-  }).join('')
+  }
 }
 
-const bodyHtml = renderPortableText(post.body || [])
+const bodyHtml = post.body ? toHTML(post.body, { components: portableTextComponents }) : ''
 const shareUrl = `https://planometrica.ru/blog/${post.slug.current}`
 ---
 
