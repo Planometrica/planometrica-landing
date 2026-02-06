@@ -1,0 +1,336 @@
+---
+import Layout from '../layouts/Layout.astro'
+---
+
+<Layout
+  title="Запросить демо ПланоCAD — Планометрика"
+  description="Запишитесь на персональную демонстрацию ПланоCAD. Покажем ArchiCAD-подобный интерфейс, AI-ассистента и инженерные сети в действии."
+  canonical="/planocad-demo"
+>
+  <main>
+    <!-- СЕКЦИЯ 1 — Hero + Форма -->
+    <section class="py-16 lg:py-24 bg-white">
+      <div class="container mx-auto px-4">
+        <div class="grid lg:grid-cols-2 gap-12 items-start max-w-6xl mx-auto">
+          <!-- Левая колонка (текст) -->
+          <div class="lg:pt-8">
+            <span class="inline-block px-4 py-2 bg-[#0A4C76]/10 text-[#0A4C76] font-medium rounded-full text-sm mb-6">
+              ПланоCAD Демо
+            </span>
+            <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-[#0A4C76] mb-6 leading-tight">
+              Посмотрите ПланоCAD в действии
+            </h1>
+            <p class="text-xl text-gray-600 mb-6">
+              Узнайте, как ПланоCAD поможет вашей команде проектировать быстрее — от концепции до рабочей документации в одном браузерном инструменте
+            </p>
+            <p class="text-gray-500 text-sm">
+              Демонстрация займёт 30-40 минут. Мы покажем инструмент на примере вашего типового проекта.
+            </p>
+          </div>
+
+          <!-- Правая колонка (форма) -->
+          <div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-100">
+            <form id="demo-form">
+              <h2 class="text-xl font-bold text-[#0A4C76] mb-6">Записаться на демо</h2>
+
+              <div class="space-y-4">
+                <!-- Имя -->
+                <div>
+                  <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Имя *</label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    placeholder="Иван Петров"
+                    required
+                    class="rounded-xl border border-gray-300 px-4 py-3 w-full focus:border-[#1A7BB3] focus:ring-1 focus:ring-[#1A7BB3] outline-none transition"
+                  />
+                </div>
+
+                <!-- Компания -->
+                <div>
+                  <label for="company" class="block text-sm font-medium text-gray-700 mb-1">Компания</label>
+                  <input
+                    type="text"
+                    id="company"
+                    name="company"
+                    placeholder="ООО «Архитектура»"
+                    class="rounded-xl border border-gray-300 px-4 py-3 w-full focus:border-[#1A7BB3] focus:ring-1 focus:ring-[#1A7BB3] outline-none transition"
+                  />
+                </div>
+
+                <!-- Email -->
+                <div>
+                  <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email *</label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="ivan@company.ru"
+                    required
+                    class="rounded-xl border border-gray-300 px-4 py-3 w-full focus:border-[#1A7BB3] focus:ring-1 focus:ring-[#1A7BB3] outline-none transition"
+                  />
+                </div>
+
+                <!-- Телефон -->
+                <div>
+                  <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">Телефон</label>
+                  <input
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    placeholder="+7 (999) 123-45-67"
+                    class="rounded-xl border border-gray-300 px-4 py-3 w-full focus:border-[#1A7BB3] focus:ring-1 focus:ring-[#1A7BB3] outline-none transition"
+                  />
+                </div>
+
+                <!-- Роль -->
+                <div>
+                  <label for="role" class="block text-sm font-medium text-gray-700 mb-1">Роль</label>
+                  <select
+                    id="role"
+                    name="role"
+                    class="rounded-xl border border-gray-300 px-4 py-3 w-full focus:border-[#1A7BB3] focus:ring-1 focus:ring-[#1A7BB3] outline-none transition bg-white"
+                  >
+                    <option value="" disabled selected>Выберите роль...</option>
+                    <option value="architect">Архитектор</option>
+                    <option value="head">Руководитель бюро</option>
+                    <option value="developer">Девелопер</option>
+                    <option value="construction">Строительная компания</option>
+                    <option value="other">Другое</option>
+                  </select>
+                </div>
+
+                <!-- Количество сотрудников -->
+                <div>
+                  <label for="employees" class="block text-sm font-medium text-gray-700 mb-1">Количество сотрудников</label>
+                  <select
+                    id="employees"
+                    name="employees"
+                    class="rounded-xl border border-gray-300 px-4 py-3 w-full focus:border-[#1A7BB3] focus:ring-1 focus:ring-[#1A7BB3] outline-none transition bg-white"
+                  >
+                    <option value="" disabled selected>Выберите...</option>
+                    <option value="1-5">1-5</option>
+                    <option value="6-20">6-20</option>
+                    <option value="21-50">21-50</option>
+                    <option value="50+">50+</option>
+                  </select>
+                </div>
+
+                <!-- Комментарий -->
+                <div>
+                  <label for="comment" class="block text-sm font-medium text-gray-700 mb-1">Комментарий</label>
+                  <textarea
+                    id="comment"
+                    name="comment"
+                    rows="3"
+                    placeholder="Расскажите о ваших задачах (необязательно)"
+                    class="rounded-xl border border-gray-300 px-4 py-3 w-full focus:border-[#1A7BB3] focus:ring-1 focus:ring-[#1A7BB3] outline-none transition resize-none"
+                  ></textarea>
+                </div>
+
+                <!-- Кнопка -->
+                <button
+                  type="submit"
+                  class="bg-[#92CF93] text-[#0A4C76] font-semibold py-3 px-6 rounded-xl hover:bg-[#7ec07f] transition w-full"
+                >
+                  Записаться на демо
+                </button>
+
+                <p class="text-gray-400 text-xs text-center mt-3">
+                  Мы свяжемся в течение 1 рабочего дня
+                </p>
+              </div>
+            </form>
+
+            <!-- Блок успеха -->
+            <div id="form-success" style="display:none" class="text-center py-8">
+              <div class="w-16 h-16 bg-[#92CF93]/20 rounded-full flex items-center justify-center mx-auto mb-6">
+                <svg class="w-8 h-8 text-[#92CF93]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <h3 class="text-2xl font-bold text-[#0A4C76] mb-2">Спасибо! Заявка отправлена</h3>
+              <p class="text-gray-600">Мы свяжемся с вами в течение 1 рабочего дня</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- СЕКЦИЯ 2 — Метрики (social proof) -->
+    <section class="py-16 bg-gray-50">
+      <div class="container mx-auto px-4">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-5xl mx-auto">
+          <!-- В 10 раз быстрее -->
+          <div class="bg-white rounded-xl p-6 text-center">
+            <div class="w-12 h-12 bg-[#1A7BB3]/10 rounded-xl flex items-center justify-center text-[#1A7BB3] mx-auto mb-4">
+              <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+              </svg>
+            </div>
+            <p class="text-3xl font-bold text-[#0A4C76] mb-1">В 10 раз</p>
+            <p class="text-gray-500 text-sm">Быстрее проектирование по сравнению с ручным</p>
+          </div>
+
+          <!-- 14 шагов -->
+          <div class="bg-white rounded-xl p-6 text-center">
+            <div class="w-12 h-12 bg-[#1A7BB3]/10 rounded-xl flex items-center justify-center text-[#1A7BB3] mx-auto mb-4">
+              <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zM3.75 12h.007v.008H3.75V12zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm-.375 5.25h.007v.008H3.75v-.008zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+              </svg>
+            </div>
+            <p class="text-3xl font-bold text-[#0A4C76] mb-1">14 шагов</p>
+            <p class="text-gray-500 text-sm">Полный workflow от участка до документации</p>
+          </div>
+
+          <!-- 6 систем -->
+          <div class="bg-white rounded-xl p-6 text-center">
+            <div class="w-12 h-12 bg-[#1A7BB3]/10 rounded-xl flex items-center justify-center text-[#1A7BB3] mx-auto mb-4">
+              <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 004.486-6.336l-3.276 3.277a3.004 3.004 0 01-2.25-2.25l3.276-3.276a4.5 4.5 0 00-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437l1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008z" />
+              </svg>
+            </div>
+            <p class="text-3xl font-bold text-[#0A4C76] mb-1">6 систем</p>
+            <p class="text-gray-500 text-sm">MEP в одном инструменте</p>
+          </div>
+
+          <!-- AI на каждом шаге -->
+          <div class="bg-white rounded-xl p-6 text-center">
+            <div class="w-12 h-12 bg-[#1A7BB3]/10 rounded-xl flex items-center justify-center text-[#1A7BB3] mx-auto mb-4">
+              <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 00-2.455 2.456z" />
+              </svg>
+            </div>
+            <p class="text-3xl font-bold text-[#0A4C76] mb-1">AI</p>
+            <p class="text-gray-500 text-sm">НейроПлан встроен в редактор</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- СЕКЦИЯ 3 — Для кого ПланоCAD -->
+    <section class="py-16 bg-white">
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 text-center mb-12">
+          Для кого ПланоCAD
+        </h2>
+
+        <div class="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+          <!-- Малые архитектурные бюро -->
+          <div class="bg-gray-50 rounded-2xl p-8">
+            <div class="w-12 h-12 bg-[#1A7BB3]/10 rounded-xl flex items-center justify-center text-[#1A7BB3] mb-4">
+              <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008z" />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-[#0A4C76] mb-2">Малые архитектурные бюро</h3>
+            <p class="text-gray-600">3-10 человек. Один инструмент вместо связки ArchiCAD + Excel + мессенджеры</p>
+          </div>
+
+          <!-- Строительные компании -->
+          <div class="bg-gray-50 rounded-2xl p-8">
+            <div class="w-12 h-12 bg-[#1A7BB3]/10 rounded-xl flex items-center justify-center text-[#1A7BB3] mb-4">
+              <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 21v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21m0 0h4.5V3.545M12.75 21h7.5V10.75M2.25 21h1.5m18 0h-18M2.25 9l4.5-1.636M18.75 3l-1.5.545m0 6.205l3 1m1.5.5l-1.5-.5M6.75 7.364V3h-3v18m3-13.636l10.5-3.819" />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-[#0A4C76] mb-2">Строительные компании</h3>
+            <p class="text-gray-600">С отделом проектирования. Архитектура + MEP + документация в браузере</p>
+          </div>
+
+          <!-- Девелоперы коттеджных посёлков -->
+          <div class="bg-gray-50 rounded-2xl p-8">
+            <div class="w-12 h-12 bg-[#1A7BB3]/10 rounded-xl flex items-center justify-center text-[#1A7BB3] mb-4">
+              <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-[#0A4C76] mb-2">Девелоперы коттеджных посёлков</h3>
+            <p class="text-gray-600">Серийное проектирование с AI-оптимизацией и типовыми решениями</p>
+          </div>
+
+          <!-- Проектные организации ИЖС -->
+          <div class="bg-gray-50 rounded-2xl p-8">
+            <div class="w-12 h-12 bg-[#1A7BB3]/10 rounded-xl flex items-center justify-center text-[#1A7BB3] mb-4">
+              <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-[#0A4C76] mb-2">Проектные организации ИЖС</h3>
+            <p class="text-gray-600">Профессиональный CAD без лицензий за сотни тысяч</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- СЕКЦИЯ 4 — Что покажем на демо -->
+    <section class="py-16 bg-gray-50">
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 text-center mb-12">
+          Что покажем на демо
+        </h2>
+
+        <div class="max-w-2xl mx-auto space-y-4 mb-10">
+          <div class="flex items-center gap-3 bg-white rounded-xl p-4">
+            <svg class="w-6 h-6 text-[#92CF93] flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+            </svg>
+            <span class="text-gray-700 text-lg">ArchiCAD-подобный интерфейс в браузере</span>
+          </div>
+
+          <div class="flex items-center gap-3 bg-white rounded-xl p-4">
+            <svg class="w-6 h-6 text-[#92CF93] flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+            </svg>
+            <span class="text-gray-700 text-lg">AI-ассистент НейроПлан на каждом этапе</span>
+          </div>
+
+          <div class="flex items-center gap-3 bg-white rounded-xl p-4">
+            <svg class="w-6 h-6 text-[#92CF93] flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+            </svg>
+            <span class="text-gray-700 text-lg">Инженерные сети (MEP) с ГОСТ-символами</span>
+          </div>
+
+          <div class="flex items-center gap-3 bg-white rounded-xl p-4">
+            <svg class="w-6 h-6 text-[#92CF93] flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+            </svg>
+            <span class="text-gray-700 text-lg">3D-визуализация в реальном времени</span>
+          </div>
+
+          <div class="flex items-center gap-3 bg-white rounded-xl p-4">
+            <svg class="w-6 h-6 text-[#92CF93] flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+            </svg>
+            <span class="text-gray-700 text-lg">Генерация документации: СПОЗУ, эскизный проект, сметы</span>
+          </div>
+        </div>
+
+        <div class="text-center">
+          <a href="#demo-form" class="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-white bg-[#0A4C76] rounded-xl hover:bg-[#093d5f] transition-all duration-200">
+            Записаться на демо
+            <svg class="ml-2 w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<script>
+  const form = document.getElementById('demo-form');
+  const successMsg = document.getElementById('form-success');
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (form instanceof HTMLElement) {
+      form.style.display = 'none';
+    }
+    if (successMsg instanceof HTMLElement) {
+      successMsg.style.display = 'block';
+    }
+  });
+</script>
