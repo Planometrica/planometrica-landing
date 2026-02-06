@@ -1,51 +1,36 @@
 ---
 import Layout from '../layouts/Layout.astro'
-import ProductHero from '../components/ProductHero.astro'
-import ProductFeatures from '../components/ProductFeatures.astro'
-import ProductCTA from '../components/ProductCTA.astro'
 
-const features = [
+const programs = [
   {
-    icon: `<svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-      <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 15.75V18m-7.5-6.75h.008v.008H8.25v-.008zm0 2.25h.008v.008H8.25V13.5zm0 2.25h.008v.008H8.25v-.008zm0 2.25h.008v.008H8.25V18zm2.498-6.75h.007v.008h-.007v-.008zm0 2.25h.007v.008h-.007V13.5zm0 2.25h.007v.008h-.007v-.008zm0 2.25h.007v.008h-.007V18zm2.504-6.75h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V13.5zm0 2.25h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V18zm2.498-6.75h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V13.5zM8.25 6h7.5v2.25h-7.5V6zM12 2.25c-1.892 0-3.758.11-5.593.322C5.307 2.7 4.5 3.65 4.5 4.757V19.5a2.25 2.25 0 002.25 2.25h10.5a2.25 2.25 0 002.25-2.25V4.757c0-1.108-.806-2.057-1.907-2.185A48.507 48.507 0 0012 2.25z" />
-    </svg>`,
-    title: 'Калькулятор ипотеки',
-    description: 'Рассчитайте ежемесячный платёж, полную стоимость кредита и переплату. Учитываем первоначальный взнос и срок.'
+    name: 'Семейная ипотека',
+    rate: 'от 6%',
+    conditions: 'Для семей с детьми до 6 лет. Маткапитал 912,162 ₽ как первый взнос',
+    badge: { text: 'Популярная', color: 'bg-[#92CF93]/20 text-[#0A4C76]' }
   },
   {
-    icon: `<svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-      <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008z" />
-    </svg>`,
-    title: 'Сравнение банков',
-    description: 'Актуальные ставки от ведущих банков. Сравните условия и выберите лучшее предложение для вашего проекта.'
+    name: 'Сельская ипотека',
+    rate: 'от 3%',
+    conditions: 'Для сельских территорий. До 6 млн ₽ (10 млн ДФО/Ленобласть)',
+    badge: null
   },
   {
-    icon: `<svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-      <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25z" />
-    </svg>`,
-    title: 'Список документов',
-    description: 'Готовый чеклист документов для подачи заявки. Подготовьтесь заранее и ускорьте одобрение.'
+    name: 'IT-ипотека',
+    rate: 'от 6%',
+    conditions: 'Для сотрудников аккредитованных IT-компаний. До 18 млн ₽',
+    badge: null
   },
   {
-    icon: `<svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-      <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-    </svg>`,
-    title: 'Интеграция со сметой',
-    description: 'Автоматический расчёт стоимости строительства из проекта. Точная сумма для заявки в банк.'
+    name: 'Дальневосточная',
+    rate: 'от 2%',
+    conditions: 'ДФО и Арктическая зона. До 6 млн ₽. Самая низкая ставка',
+    badge: { text: 'Минимальная ставка', color: 'bg-[#F59E0B]/20 text-[#92400E]' }
   },
   {
-    icon: `<svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-      <path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z" />
-    </svg>`,
-    title: 'Консультация эксперта',
-    description: 'Бесплатная консультация ипотечного брокера. Поможем выбрать программу и подготовить документы.'
-  },
-  {
-    icon: `<svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-      <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5m.75-9l3-3 2.148 2.148A12.061 12.061 0 0116.5 7.605" />
-    </svg>`,
-    title: 'Льготные программы',
-    description: 'Информация о семейной ипотеке, IT-ипотеке, сельской ипотеке. Проверим доступные программы.'
+    name: 'Стандартная',
+    rate: '22-24%',
+    conditions: 'Без льгот, любой заёмщик. Доступна всем',
+    badge: null
   }
 ]
 
@@ -55,73 +40,157 @@ const banks = [
   { name: 'Альфа-Банк', rate: 'от 10.99%' },
   { name: 'Газпромбанк', rate: 'от 11.5%' },
   { name: 'Росбанк', rate: 'от 10.99%' },
-  { name: 'ДомРФ', rate: 'от 10.9%' },
+  { name: 'ДомРФ', rate: 'от 10.9%' }
+]
+
+const packageItems = [
+  'Эскизный проект дома',
+  'Смета строительства',
+  'СПОЗУ (схема планировочной организации)',
+  'Технический паспорт проекта',
+  '3D-визуализация для банка'
 ]
 ---
 
 <Layout
-  title="Ипотека на строительство дома 2026 — калькулятор и программы"
-  description="Ипотека ИЖС 2026: семейная от 6%, сельская от 3%, IT-ипотека. Калькулятор, сравнение банков, помощь с документами."
-  keywords="ипотека на строительство дома, ипотека ИЖС, семейная ипотека, калькулятор ипотеки, льготная ипотека"
+  title="Ипотека на строительство дома 2026 — калькулятор и льготные программы"
+  description="Ипотека ИЖС 2026: семейная от 6%, сельская от 3%, IT-ипотека от 6%, дальневосточная от 2%. Калькулятор, сравнение банков, ипотечный пакет 10,000₽."
+  keywords="ипотека на строительство дома, ипотека ИЖС, семейная ипотека, калькулятор ипотеки, льготная ипотека 2026"
   ogImage="/images/og-mortgage.jpg"
   canonical="/mortgage"
   transparentHeader={true}
 >
   <main>
-    <ProductHero
-      title="Ипотека"
-      subtitle="Финансирование строительства"
-      description="Рассчитайте ипотеку на строительство дома. Сравните предложения банков, узнайте о льготных программах и получите консультацию эксперта."
-      gradient="from-[#1A7BB3] via-[#0A4C76] to-[#083d5f]"
-      primaryCta={{ text: 'Рассчитать ипотеку', href: 'https://studio.planometrica.ru/mortgage' }}
-      secondaryCta={{ text: 'Консультация', href: 'mailto:hello@planometrica.pro' }}
-      features={['Калькулятор', 'Сравнение банков', 'Льготные программы', 'Консультация']}
-    />
+    <!-- СЕКЦИЯ 1: Hero -->
+    <section class="relative min-h-[90vh] flex items-center bg-gradient-to-br from-[#1A7BB3] via-[#0A4C76] to-[#083d5f] overflow-hidden">
+      <!-- Blur decorations -->
+      <div class="absolute top-20 left-10 w-96 h-96 bg-white/10 rounded-full blur-3xl"></div>
+      <div class="absolute bottom-20 right-10 w-80 h-80 bg-[#92CF93]/20 rounded-full blur-3xl"></div>
+      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#1A7BB3]/20 rounded-full blur-3xl"></div>
 
-    <ProductFeatures
-      badge="Возможности"
-      title="Всё для оформления ипотеки"
-      subtitle="От расчёта до одобрения"
-      features={features}
-      columns={3}
-    />
+      <div class="container mx-auto px-4 py-32 relative z-10">
+        <div class="max-w-4xl mx-auto text-center">
+          <!-- Badge -->
+          <span class="inline-block px-4 py-2 bg-white/10 backdrop-blur-sm text-white font-medium rounded-full text-sm mb-6 border border-white/20">
+            Ипотека ИЖС 2026
+          </span>
 
-    <!-- Calculator Preview -->
+          <!-- Title -->
+          <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+            Ипотека на строительство дома — от 2% годовых
+          </h1>
+
+          <!-- Subtitle -->
+          <p class="text-xl md:text-2xl text-white/80 mb-8 max-w-3xl mx-auto">
+            Льготные программы, калькулятор, помощь с документами. Подготовим ипотечный пакет для банка.
+          </p>
+
+          <!-- Pills -->
+          <div class="flex flex-wrap justify-center gap-3 mb-10">
+            <span class="px-4 py-2 bg-white/10 backdrop-blur-sm text-white text-sm font-medium rounded-full border border-white/20">
+              Семейная от 6%
+            </span>
+            <span class="px-4 py-2 bg-white/10 backdrop-blur-sm text-white text-sm font-medium rounded-full border border-white/20">
+              Сельская от 3%
+            </span>
+            <span class="px-4 py-2 bg-white/10 backdrop-blur-sm text-white text-sm font-medium rounded-full border border-white/20">
+              IT-ипотека от 6%
+            </span>
+            <span class="px-4 py-2 bg-white/10 backdrop-blur-sm text-white text-sm font-medium rounded-full border border-white/20">
+              Дальневосточная от 2%
+            </span>
+          </div>
+
+          <!-- CTAs -->
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a
+              href="#calculator"
+              class="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-[#0A4C76] bg-white rounded-xl hover:bg-gray-100 transition-all duration-200 shadow-lg hover:shadow-xl"
+            >
+              Рассчитать ипотеку
+            </a>
+            <a
+              href="mailto:hello@planometrica.pro"
+              class="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-white border-2 border-white/30 rounded-xl hover:bg-white/10 transition-all duration-200"
+            >
+              Получить консультацию
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- СЕКЦИЯ 2: Льготные программы -->
     <section class="py-24 bg-white">
       <div class="container mx-auto px-4">
         <div class="text-center mb-16">
-          <span class="inline-block px-4 py-2 bg-[#92CF93]/20 text-[#1A7BB3] font-medium rounded-full text-sm mb-4">
+          <span class="inline-block px-4 py-2 bg-[#92CF93]/20 text-[#0A4C76] font-medium rounded-full text-sm mb-4">
+            Льготные программы 2026
+          </span>
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900">
+            Какая программа подходит вам?
+          </h2>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+          {programs.map((program) => (
+            <div class="relative bg-white rounded-2xl p-6 border border-gray-100 hover:shadow-lg hover:border-[#1A7BB3]/30 transition-all duration-300">
+              {program.badge && (
+                <span class={`absolute top-4 right-4 px-3 py-1 text-xs font-medium rounded-full ${program.badge.color}`}>
+                  {program.badge.text}
+                </span>
+              )}
+              <h3 class="text-xl font-bold text-[#0A4C76] mb-3 pr-20">
+                {program.name}
+              </h3>
+              <div class="text-3xl font-bold text-[#0A4C76] mb-3">
+                {program.rate}
+              </div>
+              <p class="text-gray-600 text-sm leading-relaxed">
+                {program.conditions}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- СЕКЦИЯ 3: Калькулятор -->
+    <section id="calculator" class="py-24 bg-gray-50">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-16">
+          <span class="inline-block px-4 py-2 bg-[#0A4C76]/10 text-[#0A4C76] font-medium rounded-full text-sm mb-4">
             Калькулятор
           </span>
           <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
             Рассчитайте ипотеку
           </h2>
           <p class="text-xl text-gray-600 max-w-2xl mx-auto">
-            Узнайте примерный ежемесячный платёж и переплату за весь срок кредита
+            Узнайте примерный ежемесячный платёж
           </p>
         </div>
 
-        <div class="max-w-4xl mx-auto bg-gray-50 rounded-3xl p-8 md:p-12">
+        <div class="max-w-4xl mx-auto bg-white rounded-3xl p-8 md:p-12 shadow-sm border border-gray-100">
           <div class="grid md:grid-cols-2 gap-8">
             <!-- Input Side -->
             <div class="space-y-6">
               <div>
                 <label class="block text-sm font-medium text-gray-700 mb-2">Стоимость дома</label>
                 <div class="relative">
-                  <input type="text" value="5 000 000" class="w-full px-4 py-3 border border-gray-200 rounded-xl text-lg font-medium" readonly />
+                  <input type="text" value="5 000 000" class="w-full px-4 py-3 border border-gray-200 rounded-xl text-lg font-medium bg-gray-50" readonly />
                   <span class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500">₽</span>
                 </div>
               </div>
               <div>
                 <label class="block text-sm font-medium text-gray-700 mb-2">Первоначальный взнос</label>
                 <div class="relative">
-                  <input type="text" value="1 000 000" class="w-full px-4 py-3 border border-gray-200 rounded-xl text-lg font-medium" readonly />
+                  <input type="text" value="1 000 000" class="w-full px-4 py-3 border border-gray-200 rounded-xl text-lg font-medium bg-gray-50" readonly />
                   <span class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500">20%</span>
                 </div>
               </div>
               <div>
                 <label class="block text-sm font-medium text-gray-700 mb-2">Срок кредита</label>
-                <input type="text" value="20 лет" class="w-full px-4 py-3 border border-gray-200 rounded-xl text-lg font-medium" readonly />
+                <input type="text" value="20 лет" class="w-full px-4 py-3 border border-gray-200 rounded-xl text-lg font-medium bg-gray-50" readonly />
               </div>
             </div>
 
@@ -146,30 +215,82 @@ const banks = [
               </div>
 
               <a
-                href="https://studio.planometrica.ru/mortgage"
+                href="https://studio.planometrica.ru"
                 class="block w-full py-3 text-center font-semibold text-[#0A4C76] bg-white rounded-xl hover:bg-gray-100 transition-colors"
               >
-                Подробный расчёт
+                Подробный расчёт в Студии
               </a>
+            </div>
+          </div>
+        </div>
+
+        <p class="text-center text-gray-500 text-sm mt-6">
+          Интерактивный калькулятор с выбором программы доступен в Студии
+        </p>
+      </div>
+    </section>
+
+    <!-- СЕКЦИЯ 4: Ипотечный пакет -->
+    <section class="py-24 bg-white">
+      <div class="container mx-auto px-4">
+        <div class="max-w-5xl mx-auto">
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-12 text-center">
+            Ипотечный пакет — подготовим документы для банка
+          </h2>
+
+          <div class="grid md:grid-cols-2 gap-12 items-center">
+            <!-- Left: Description -->
+            <div>
+              <p class="text-xl text-gray-600 mb-8">
+                Готовый комплект документов для подачи заявки на ипотеку ИЖС
+              </p>
+
+              <div class="space-y-4">
+                {packageItems.map((item) => (
+                  <div class="flex items-start gap-3">
+                    <svg class="w-6 h-6 text-[#92CF93] flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span class="text-gray-700 text-lg">{item}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <!-- Right: Price Card -->
+            <div class="bg-gradient-to-br from-gray-50 to-white rounded-2xl p-8 border border-gray-100 shadow-lg">
+              <div class="text-center">
+                <div class="text-5xl font-bold text-[#0A4C76] mb-2">
+                  10 000 ₽
+                </div>
+                <p class="text-gray-600 mb-8">
+                  за полный ипотечный пакет
+                </p>
+
+                <a
+                  href="https://studio.planometrica.ru"
+                  class="inline-flex items-center justify-center w-full px-8 py-4 text-lg font-semibold text-[#0A4C76] bg-[#92CF93] rounded-xl hover:bg-[#7dbf7e] transition-all duration-200"
+                >
+                  Заказать пакет
+                </a>
+
+                <p class="text-gray-500 text-xs mt-4">
+                  Или включён в Стандарт-пакет (14 900 ₽)
+                </p>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Banks -->
+    <!-- СЕКЦИЯ 5: Банки-партнёры -->
     <section class="py-24 bg-gray-50">
       <div class="container mx-auto px-4">
         <div class="text-center mb-16">
-          <span class="inline-block px-4 py-2 bg-[#0A4C76]/10 text-[#0A4C76] font-medium rounded-full text-sm mb-4">
-            Банки-партнёры
-          </span>
           <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-            Сравните предложения
+            Сравните предложения банков
           </h2>
-          <p class="text-xl text-gray-600 max-w-2xl mx-auto">
-            Актуальные ставки на ипотеку для строительства дома
-          </p>
         </div>
 
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
@@ -183,16 +304,38 @@ const banks = [
         </div>
 
         <p class="text-center text-gray-500 text-sm mt-8">
-          * Ставки актуальны на январь 2026. Финальные условия зависят от программы и заёмщика.
+          * Ставки актуальны на февраль 2026. Финальные условия зависят от программы и заёмщика.
         </p>
       </div>
     </section>
 
-    <ProductCTA
-      title="Получите одобрение ипотеки"
-      description="Консультация эксперта бесплатно. Поможем выбрать программу и подготовить документы."
-      primaryCta={{ text: 'Получить консультацию', href: 'mailto:hello@planometrica.pro' }}
-      secondaryCta={{ text: 'Рассчитать ипотеку', href: 'https://studio.planometrica.ru/mortgage' }}
-    />
+    <!-- СЕКЦИЯ 6: CTA -->
+    <section class="py-24 bg-gradient-to-r from-[#0A4C76] to-[#1A7BB3]">
+      <div class="container mx-auto px-4">
+        <div class="max-w-4xl mx-auto text-center">
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6">
+            Получите одобрение ипотеки быстрее
+          </h2>
+          <p class="text-xl text-white/80 mb-10">
+            Спроектируйте дом в Студии → Закажите ипотечный пакет → Подайте заявку в банк
+          </p>
+
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a
+              href="https://studio.planometrica.ru"
+              class="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-[#0A4C76] bg-[#92CF93] rounded-xl hover:bg-[#7dbf7e] transition-all duration-200 shadow-lg"
+            >
+              Начать проект дома
+            </a>
+            <a
+              href="mailto:hello@planometrica.pro"
+              class="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-white border-2 border-white/30 rounded-xl hover:bg-white/10 transition-all duration-200"
+            >
+              Консультация по ипотеке
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 </Layout>
