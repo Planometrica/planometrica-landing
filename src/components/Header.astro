@@ -45,18 +45,11 @@ const isActive = (href: string) => currentPath === href || currentPath.startsWit
     <div class="flex items-center justify-between h-16 lg:h-20">
       <!-- Logo -->
       <a href="/" class="flex items-center gap-2 group">
-        <svg
-          class:list={[
-            "w-8 h-8 transition-colors",
-            transparent ? "text-white" : "text-[#0A4C76]"
-          ]}
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          stroke-width="1.5"
-        >
-          <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
-        </svg>
+        <img
+          src="/images/logo.png"
+          alt="Планометрика"
+          class="h-8 w-auto rounded-lg"
+        />
         <span
           class:list={[
             "text-xl font-semibold tracking-tight transition-colors",
@@ -249,9 +242,11 @@ const isActive = (href: string) => currentPath === href || currentPath.startsWit
       <!-- Mobile Header -->
       <div class="flex items-center justify-between px-4 h-16 border-b">
         <a href="/" class="flex items-center gap-2">
-          <svg class="w-8 h-8 text-[#0A4C76]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
-          </svg>
+          <img
+            src="/images/logo.png"
+            alt="Планометрика"
+            class="h-8 w-auto rounded-lg"
+          />
           <span class="text-xl font-semibold text-gray-900">Планометрика</span>
         </a>
         <button
