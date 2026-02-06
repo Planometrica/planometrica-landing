@@ -1,0 +1,113 @@
+---
+import Layout from '../layouts/Layout.astro'
+
+interface Props {
+  title: string
+  lastUpdated: string
+}
+
+const { title, lastUpdated } = Astro.props
+---
+
+<Layout
+  title={`${title} — Планометрика`}
+  description={title}
+  transparentHeader={false}
+>
+  <main class="py-16 bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Header -->
+      <h1 class="text-3xl md:text-4xl font-bold text-[#0A4C76] mb-2">{title}</h1>
+      <p class="text-sm text-gray-500 mb-10">Последнее обновление: {lastUpdated}</p>
+
+      <!-- Content -->
+      <div class="legal-content">
+        <slot />
+      </div>
+
+      <!-- Company Details -->
+      <div class="mt-12 pt-8 border-t border-gray-200">
+        <div class="text-gray-500 text-sm space-y-1">
+          <p><strong>ООО "Инженерные цифровые технологии"</strong> (ООО "ИЦТ")</p>
+          <p>ОГРН: 1255900007857</p>
+          <p>ИНН: 5904414974</p>
+          <p>Email: <a href="mailto:mail@planometrica.ru" class="text-[#1A7BB3] hover:underline">mail@planometrica.ru</a></p>
+          <p>Телефон: <a href="tel:88003008958" class="text-[#1A7BB3] hover:underline">8 800 300-89-58</a></p>
+        </div>
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<style is:global>
+  .legal-content h2 {
+    color: #0A4C76;
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .legal-content h3 {
+    color: #0A4C76;
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .legal-content p {
+    color: #374151;
+    line-height: 1.75;
+    margin-bottom: 1rem;
+  }
+
+  .legal-content ul {
+    list-style-type: disc;
+    padding-left: 1.5rem;
+    margin-bottom: 1rem;
+    color: #374151;
+  }
+
+  .legal-content ul li {
+    margin-bottom: 0.5rem;
+    line-height: 1.75;
+  }
+
+  .legal-content a {
+    color: #1A7BB3;
+  }
+
+  .legal-content a:hover {
+    text-decoration: underline;
+  }
+
+  .legal-content section {
+    margin-bottom: 2rem;
+  }
+
+  .legal-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1.5rem;
+  }
+
+  .legal-content th,
+  .legal-content td {
+    border: 1px solid #e5e7eb;
+    padding: 0.75rem;
+    text-align: left;
+  }
+
+  .legal-content th {
+    background-color: #f9fafb;
+    font-weight: 600;
+  }
+
+  .legal-content .company-details {
+    background-color: #f9fafb;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    margin-top: 2rem;
+  }
+</style>
