@@ -1,37 +1,27 @@
 ---
 import Layout from '../layouts/Layout.astro'
-import ProductHero from '../components/ProductHero.astro'
-import ProductFeatures from '../components/ProductFeatures.astro'
-import ProductCTA from '../components/ProductCTA.astro'
 
-const features = [
+const documentTypes = [
   {
     icon: `<svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
       <path stroke-linecap="round" stroke-linejoin="round" d="M9 6.75V15m6-6v8.25m.503 3.498l4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 00-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0z" />
     </svg>`,
     title: 'СПОЗУ',
-    description: 'Схема планировочной организации земельного участка. Автоматическая генерация по данным проекта и участка.'
-  },
-  {
-    icon: `<svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-      <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
-    </svg>`,
-    title: 'Проектный пакет',
-    description: 'Полный комплект документации для строительства: архитектурные чертежи, конструктив, инженерия.'
+    description: 'Схема планировочной организации земельного участка. Расположение дома, отступы от границ, подъезды — для уведомления о строительстве.'
   },
   {
     icon: `<svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
       <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
     </svg>`,
     title: 'Планы этажей',
-    description: 'Детальные поэтажные планы с размерами, экспликацией помещений и спецификацией отделки.'
+    description: 'Детальные поэтажные планы с размерами помещений, экспликацией и спецификацией материалов отделки.'
   },
   {
     icon: `<svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
       <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6H15m-1.5 3H15m-1.5 3H15M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21" />
     </svg>`,
     title: 'Фасады',
-    description: 'Чертежи фасадов со всех сторон здания с указанием отметок и отделочных материалов.'
+    description: 'Чертежи фасадов со всех сторон с указанием высотных отметок и отделочных материалов.'
   },
   {
     icon: `<svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
@@ -39,6 +29,14 @@ const features = [
     </svg>`,
     title: 'Разрезы',
     description: 'Вертикальные разрезы здания с конструктивными узлами и высотными отметками.'
+  },
+  {
+    icon: `<svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.774 48.774 0 00-5.232 0 2.192 2.192 0 00-1.736 1.039l-.821 1.316z" />
+      <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0zM18.75 10.5h.008v.008h-.008V10.5z" />
+    </svg>`,
+    title: '3D визуализация',
+    description: 'Фотореалистичные рендеры экстерьера с разных ракурсов. 5 изображений в комплекте.'
   },
   {
     icon: `<svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
@@ -56,11 +54,12 @@ const packages = [
     description: 'Для уведомления о строительстве',
     includes: [
       'Схема участка с домом',
-      'Зоны отступов',
+      'Зоны отступов от границ',
       'Подъезды и проезды',
-      'Соответствие нормам',
+      'Соответствие нормам ИЖС',
       'Готово за 1 день'
-    ]
+    ],
+    popular: false
   },
   {
     name: 'Стандарт-пакет',
@@ -69,13 +68,70 @@ const packages = [
     includes: [
       'Планы этажей + фасады',
       'СПОЗУ включён',
-      '3D визуализация',
+      '3D визуализация (5 рендеров)',
       'Ведомость материалов',
+      'Предварительная смета',
       'Готово за 3 дня'
     ],
     popular: true
+  },
+  {
+    name: 'AI Визуализация',
+    price: '990',
+    description: 'Фотореалистичные рендеры',
+    includes: [
+      '5 рендеров экстерьера',
+      'Разные ракурсы и время суток',
+      'Высокое разрешение (4K)',
+      'Выбор окружения (лес, поле, город)',
+      'Готово за 1 час'
+    ],
+    popular: false
+  },
+  {
+    name: 'Ипотечный пакет',
+    price: '10 000',
+    description: 'Документы для банка',
+    includes: [
+      'Полный Стандарт-пакет',
+      'Проектная декларация',
+      'Смета для банка (форма банка)',
+      'Техническое заключение',
+      'Сопроводительное письмо',
+      'Готово за 5 дней'
+    ],
+    popular: false
   }
 ]
+
+const steps = [
+  {
+    number: 1,
+    title: 'Загрузите проект',
+    description: 'Из Студии, ПланоCAD или внешний файл',
+    accent: false
+  },
+  {
+    number: 2,
+    title: 'Выберите пакет',
+    description: 'СПОЗУ, Стандарт или Ипотечный',
+    accent: false
+  },
+  {
+    number: 3,
+    title: 'AI генерирует',
+    description: 'Автоматическое создание документов по ГОСТ',
+    accent: false
+  },
+  {
+    number: 4,
+    title: 'Скачайте готовое',
+    description: 'PDF, DWG, DXF — любой формат',
+    accent: true
+  }
+]
+
+const pills = ['СПОЗУ', 'Планы этажей', 'Фасады', 'Сметы', '3D визуализация']
 ---
 
 <Layout
@@ -87,58 +143,130 @@ const packages = [
   transparentHeader={true}
 >
   <main>
-    <ProductHero
-      title="Документы"
-      subtitle="Готовая документация для строительства"
-      description="Автоматическая генерация проектной документации из вашего проекта. СПОЗУ, планы этажей, фасады, разрезы, сметы — всё по ГОСТ."
-      gradient="from-[#0A4C76] to-[#1A7BB3]"
-      primaryCta={{ text: 'Создать документы', href: 'https://studio.planometrica.ru/docs' }}
-      secondaryCta={{ text: 'Примеры документов', href: '#examples' }}
-      features={['СПОЗУ', 'Планы этажей', 'Фасады', 'Сметы']}
-    />
+    <!-- СЕКЦИЯ 1: Hero -->
+    <section class="relative min-h-[90vh] flex items-center bg-gradient-to-br from-[#0A4C76] to-[#1A7BB3] overflow-hidden">
+      <!-- Blur decorations -->
+      <div class="absolute top-20 left-10 w-96 h-96 bg-white/10 rounded-full blur-3xl"></div>
+      <div class="absolute bottom-20 right-10 w-80 h-80 bg-[#92CF93]/20 rounded-full blur-3xl"></div>
+      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-white/5 rounded-full blur-3xl"></div>
 
-    <ProductFeatures
-      badge="Состав"
-      title="Полный комплект документации"
-      subtitle="Всё необходимое для согласования и строительства"
-      features={features}
-    />
+      <div class="container mx-auto px-4 py-32 relative z-10">
+        <div class="max-w-4xl mx-auto text-center">
+          <!-- Badge -->
+          <span class="inline-block px-4 py-2 bg-white/10 backdrop-blur-sm text-white font-medium rounded-full text-sm mb-6 border border-white/20">
+            Проектная документация
+          </span>
 
-    <!-- Packages -->
+          <!-- Title -->
+          <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+            Документы для строительства дома
+          </h1>
+
+          <!-- Subtitle -->
+          <p class="text-xl md:text-2xl text-white/90 mb-4 font-medium">
+            СПОЗУ от 490 ₽ · Полный пакет от 14 900 ₽ · Генерация по ГОСТ
+          </p>
+
+          <!-- Description -->
+          <p class="text-lg text-white/70 mb-8 max-w-3xl mx-auto">
+            Автоматическая генерация проектной документации из вашего проекта. Загрузите планировку — получите готовый комплект для согласования и строительства.
+          </p>
+
+          <!-- CTAs -->
+          <div class="flex flex-col sm:flex-row gap-4 justify-center mb-10">
+            <a
+              href="https://studio.planometrica.ru"
+              class="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-[#0A4C76] bg-white rounded-xl hover:bg-gray-100 transition-all duration-200 shadow-lg hover:shadow-xl"
+            >
+              Создать документы
+              <svg class="ml-2 w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
+            </a>
+            <a
+              href="#packages"
+              class="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-white border-2 border-white/30 rounded-xl hover:bg-white/10 transition-all duration-200"
+            >
+              Примеры документов
+            </a>
+          </div>
+
+          <!-- Pills -->
+          <div class="flex flex-wrap justify-center gap-3">
+            {pills.map((pill) => (
+              <span class="px-4 py-2 bg-white/10 backdrop-blur-sm text-white text-sm font-medium rounded-full border border-white/20">
+                {pill}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- СЕКЦИЯ 2: Состав документации -->
     <section class="py-24 bg-white">
       <div class="container mx-auto px-4">
         <div class="text-center mb-16">
           <span class="inline-block px-4 py-2 bg-[#92CF93]/20 text-[#1A7BB3] font-medium rounded-full text-sm mb-4">
-            Пакеты документов
+            Что мы генерируем
           </span>
           <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-            Выберите комплект
+            Полный комплект документации
+          </h2>
+          <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+            Всё необходимое для согласования и строительства
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+          {documentTypes.map((doc) => (
+            <div class="bg-white rounded-2xl p-6 border border-gray-100 hover:shadow-lg hover:border-[#1A7BB3]/30 transition-all duration-300">
+              <div class="w-14 h-14 bg-[#0A4C76]/10 rounded-xl flex items-center justify-center text-[#0A4C76] mb-4">
+                <Fragment set:html={doc.icon} />
+              </div>
+              <h3 class="text-xl font-semibold text-[#0A4C76] mb-2">{doc.title}</h3>
+              <p class="text-gray-600 leading-relaxed">{doc.description}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- СЕКЦИЯ 3: Пакеты документов -->
+    <section id="packages" class="py-24 bg-gray-50">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-16">
+          <span class="inline-block px-4 py-2 bg-[#92CF93]/20 text-[#1A7BB3] font-medium rounded-full text-sm mb-4">
+            Тарифы
+          </span>
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+            Выберите пакет документов
           </h2>
           <p class="text-xl text-gray-600 max-w-2xl mx-auto">
             Документация под любую задачу — от уведомления до полного проекта
           </p>
         </div>
 
-        <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
           {packages.map((pkg) => (
             <div class:list={[
-              "bg-white rounded-2xl p-8 border-2 relative",
+              "bg-white rounded-2xl p-6 border-2 relative",
               pkg.popular ? "border-[#0A4C76]" : "border-gray-200"
             ]}>
               {pkg.popular && (
-                <div class="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 bg-[#0A4C76] text-white text-sm font-medium rounded-full">
+                <div class="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-[#0A4C76] text-white text-xs font-medium rounded-full">
                   Популярный
                 </div>
               )}
-              <h3 class="text-xl font-semibold text-gray-900 mb-2">{pkg.name}</h3>
-              <p class="text-gray-600 mb-6">{pkg.description}</p>
+              <h3 class="text-xl font-bold text-gray-900 mb-1">{pkg.name}</h3>
+              <p class="text-gray-500 text-sm mb-4">{pkg.description}</p>
               <div class="mb-6">
                 <span class="text-4xl font-bold text-[#0A4C76]">{pkg.price} ₽</span>
               </div>
-              <ul class="space-y-3 mb-8">
+              <ul class="space-y-3 mb-6">
                 {pkg.includes.map((item) => (
-                  <li class="flex items-center gap-2 text-gray-600">
-                    <svg class="w-5 h-5 text-[#92CF93]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <li class="flex items-start gap-2 text-gray-600 text-sm">
+                    <svg class="w-5 h-5 text-[#92CF93] flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
                     </svg>
                     {item}
@@ -146,7 +274,7 @@ const packages = [
                 ))}
               </ul>
               <a
-                href="https://studio.planometrica.ru/docs"
+                href="https://studio.planometrica.ru"
                 class:list={[
                   "block w-full py-3 text-center font-semibold rounded-xl transition-colors",
                   pkg.popular
@@ -162,48 +290,62 @@ const packages = [
       </div>
     </section>
 
-    <!-- Process -->
-    <section class="py-24 bg-gray-50">
+    <!-- СЕКЦИЯ 4: Процесс -->
+    <section class="py-24 bg-white">
       <div class="container mx-auto px-4">
         <div class="text-center mb-16">
           <span class="inline-block px-4 py-2 bg-[#0A4C76]/10 text-[#0A4C76] font-medium rounded-full text-sm mb-4">
-            Процесс
-          </span>
-          <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
             Как это работает
+          </span>
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900">
+            4 шага к документам
           </h2>
         </div>
 
         <div class="grid md:grid-cols-4 gap-8 max-w-5xl mx-auto">
-          <div class="text-center">
-            <div class="w-12 h-12 mx-auto mb-4 rounded-full bg-[#0A4C76] flex items-center justify-center text-white font-bold">1</div>
-            <h3 class="font-semibold text-gray-900 mb-2">Загрузите проект</h3>
-            <p class="text-gray-600 text-sm">Из Studio, ПланоCAD или внешний файл</p>
-          </div>
-          <div class="text-center">
-            <div class="w-12 h-12 mx-auto mb-4 rounded-full bg-[#0A4C76] flex items-center justify-center text-white font-bold">2</div>
-            <h3 class="font-semibold text-gray-900 mb-2">Выберите пакет</h3>
-            <p class="text-gray-600 text-sm">СПОЗУ, эскизный или полный проект</p>
-          </div>
-          <div class="text-center">
-            <div class="w-12 h-12 mx-auto mb-4 rounded-full bg-[#0A4C76] flex items-center justify-center text-white font-bold">3</div>
-            <h3 class="font-semibold text-gray-900 mb-2">AI генерирует</h3>
-            <p class="text-gray-600 text-sm">Автоматическое создание документов</p>
-          </div>
-          <div class="text-center">
-            <div class="w-12 h-12 mx-auto mb-4 rounded-full bg-[#92CF93] flex items-center justify-center text-white font-bold">4</div>
-            <h3 class="font-semibold text-gray-900 mb-2">Скачайте готовое</h3>
-            <p class="text-gray-600 text-sm">PDF, DWG, DXF — любой формат</p>
-          </div>
+          {steps.map((step) => (
+            <div class="text-center">
+              <div class:list={[
+                "w-12 h-12 mx-auto mb-4 rounded-full flex items-center justify-center text-white font-bold",
+                step.accent ? "bg-[#92CF93]" : "bg-[#0A4C76]"
+              ]}>
+                {step.number}
+              </div>
+              <h3 class="font-semibold text-gray-900 mb-2">{step.title}</h3>
+              <p class="text-gray-600 text-sm">{step.description}</p>
+            </div>
+          ))}
         </div>
       </div>
     </section>
 
-    <ProductCTA
-      title="Получите документацию за минуты"
-      description="Загрузите проект — получите готовый комплект документов для строительства."
-      primaryCta={{ text: 'Создать документы', href: 'https://studio.planometrica.ru/docs' }}
-      secondaryCta={{ text: 'Консультация', href: 'mailto:hello@planometrica.pro' }}
-    />
+    <!-- СЕКЦИЯ 5: CTA -->
+    <section class="py-24 bg-gradient-to-r from-[#0A4C76] to-[#1A7BB3]">
+      <div class="container mx-auto px-4">
+        <div class="max-w-4xl mx-auto text-center">
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6">
+            Получите документацию за минуты
+          </h2>
+          <p class="text-xl text-white/80 mb-10">
+            Загрузите проект — получите готовый комплект документов для строительства и согласования.
+          </p>
+
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a
+              href="https://studio.planometrica.ru"
+              class="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-[#0A4C76] bg-white rounded-xl hover:bg-gray-100 transition-all duration-200 shadow-lg"
+            >
+              Создать документы
+            </a>
+            <a
+              href="mailto:hello@planometrica.pro"
+              class="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-white border-2 border-white/30 rounded-xl hover:bg-white/10 transition-all duration-200"
+            >
+              hello@planometrica.pro
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 </Layout>
