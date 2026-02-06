@@ -1,0 +1,397 @@
+---
+import Layout from '../layouts/Layout.astro'
+
+const audiences = [
+  {
+    icon: `<svg class="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008z" />
+    </svg>`,
+    title: 'Банки и ипотечные брокеры',
+    description: 'Предложите клиентам не просто ипотеку, а готовый проект дома. Увеличьте конверсию заявок, снизьте отток на этапе выбора объекта.',
+    features: [
+      'Проект дома при оформлении ипотеки',
+      'Визуализация для одобрения кредита',
+      'Документация для банка автоматически'
+    ]
+  },
+  {
+    icon: `<svg class="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 21v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21m0 0h4.5V3.545M12.75 21h7.5V10.75M2.25 21h1.5m18 0h-18M2.25 9l4.5-1.636M18.75 3l-1.5.545m0 6.205l3 1m1.5.5l-1.5-.5M6.75 7.364V3h-3v18m3-13.636l10.5-3.819" />
+    </svg>`,
+    title: 'Девелоперы ИЖС',
+    description: 'Дайте покупателям участков возможность сразу спроектировать дом. Повысьте ценность участка и ускорьте продажи.',
+    features: [
+      'Конфигуратор дома на сайте посёлка',
+      '10 архитектурных стилей',
+      'Автоматическая привязка к участку'
+    ]
+  },
+  {
+    icon: `<svg class="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z" />
+    </svg>`,
+    title: 'Маркетплейсы и экосистемы',
+    description: 'Добавьте проектирование домов в свой маркетплейс строительных услуг или экосистему недвижимости.',
+    features: [
+      'API для встраивания в любую платформу',
+      'SDK для React и мобильных',
+      'Брендирование под вашу компанию'
+    ]
+  }
+]
+
+const capabilities = [
+  {
+    icon: `<svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z" />
+    </svg>`,
+    title: 'AI-генерация планировок',
+    description: 'Нейросеть создаёт оптимальные планировки по параметрам: площадь, этажность, количество комнат, стиль.'
+  },
+  {
+    icon: `<svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.774 48.774 0 00-5.232 0 2.192 2.192 0 00-1.736 1.039l-.821 1.316z" />
+      <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0zM18.75 10.5h.008v.008h-.008V10.5z" />
+    </svg>`,
+    title: '3D визуализация',
+    description: 'Фотореалистичные рендеры экстерьера и интерьера. 10 архитектурных стилей.'
+  },
+  {
+    icon: `<svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+    </svg>`,
+    title: 'Проектная документация',
+    description: 'СПОЗУ, планы этажей, фасады, разрезы, сметы — генерация по ГОСТ.'
+  },
+  {
+    icon: `<svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75M15 10.5a3 3 0 11-6 0 3 3 0 016 0zm3 0h.008v.008H18V10.5zm-12 0h.008v.008H6V10.5z" />
+    </svg>`,
+    title: 'Ипотечный пакет',
+    description: 'Автоматическая подготовка документов для банка: смета, проектная декларация, тех. заключение.'
+  },
+  {
+    icon: `<svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M9.53 16.122a3 3 0 00-5.78 1.128 2.25 2.25 0 01-2.4 2.245 4.5 4.5 0 008.4-2.245c0-.399-.078-.78-.22-1.128zm0 0a15.998 15.998 0 003.388-1.62m-5.043-.025a15.994 15.994 0 011.622-3.395m3.42 3.42a15.995 15.995 0 004.764-4.648l3.876-5.814a1.151 1.151 0 00-1.597-1.597L14.146 6.32a15.996 15.996 0 00-4.649 4.763m3.42 3.42a6.776 6.776 0 00-3.42-3.42" />
+    </svg>`,
+    title: 'Полное брендирование',
+    description: 'Ваш логотип, цвета, домен. Клиенты видят ваш бренд, не Planometrica.'
+  },
+  {
+    icon: `<svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5" />
+    </svg>`,
+    title: 'API + SDK',
+    description: 'REST API с документацией. React SDK для быстрой интеграции. Webhook для событий.'
+  }
+]
+
+const pricingPlans = [
+  {
+    name: 'Стартовый',
+    price: '500 000',
+    period: '/год',
+    description: 'Для небольших компаний',
+    features: [
+      'До 100 проектов/мес',
+      'API доступ',
+      'Базовое брендирование',
+      'Email поддержка',
+      'Документация'
+    ],
+    recommended: false,
+    cta: 'Обсудить'
+  },
+  {
+    name: 'Бизнес',
+    price: '1 200 000',
+    period: '/год',
+    description: 'Для растущих компаний',
+    features: [
+      'До 1 000 проектов/мес',
+      'API + React SDK',
+      'Полное брендирование',
+      'Выделенный менеджер',
+      'SLA 99.9%',
+      'Приоритетная поддержка'
+    ],
+    recommended: true,
+    cta: 'Обсудить'
+  },
+  {
+    name: 'Энтерпрайз',
+    price: 'По запросу',
+    period: '',
+    description: 'Для крупных экосистем',
+    features: [
+      'Безлимитные проекты',
+      'Кастомная интеграция',
+      'On-premise установка',
+      'Выделенная команда',
+      'Кастомный SLA',
+      'Обучение команды'
+    ],
+    recommended: false,
+    cta: 'Связаться'
+  }
+]
+
+const steps = [
+  { number: 1, title: 'Обсуждение', description: 'Определяем требования и сценарии использования' },
+  { number: 2, title: 'Настройка', description: 'Брендирование, настройка API, тестовая среда' },
+  { number: 3, title: 'Интеграция', description: 'Подключение к вашей платформе с помощью SDK' },
+  { number: 4, title: 'Запуск', description: 'Продакшн-среда, мониторинг, поддержка' }
+]
+
+const metrics = [
+  { value: '10 000+', label: 'планировок сгенерировано' },
+  { value: '2 недели', label: 'на интеграцию' },
+  { value: '99.9%', label: 'uptime API' }
+]
+---
+
+<Layout
+  title="White-label проектирование домов — API и SDK для бизнеса"
+  description="Встройте AI-проектирование домов в свою платформу. API, SDK, полное брендирование. Для банков, девелоперов, маркетплейсов. От 500 000 ₽/год."
+  keywords="white-label проектирование, API проектирование домов, SDK ИЖС, B2B платформа, проектирование для бизнеса"
+  ogImage="/images/og-partners.jpg"
+  canonical="/partners"
+  transparentHeader={true}
+>
+  <main>
+    <!-- СЕКЦИЯ 1: Hero -->
+    <section class="relative min-h-[90vh] flex items-center bg-gradient-to-br from-[#1A7BB3] via-[#0A4C76] to-[#083d5f] overflow-hidden">
+      <!-- Blur decorations -->
+      <div class="absolute top-20 left-10 w-72 h-72 bg-[#1A7BB3]/20 rounded-full blur-3xl"></div>
+      <div class="absolute bottom-20 right-10 w-96 h-96 bg-[#0A4C76]/30 rounded-full blur-3xl"></div>
+      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-white/5 rounded-full blur-3xl"></div>
+
+      <div class="container mx-auto px-4 py-32 relative z-10">
+        <div class="max-w-4xl mx-auto text-center">
+          <!-- Badge -->
+          <span class="inline-block px-4 py-2 bg-white/10 backdrop-blur-sm text-white font-medium rounded-full text-sm mb-6 border border-white/20">
+            White-label решение
+          </span>
+
+          <!-- Title -->
+          <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+            Встройте проектирование домов в свою платформу
+          </h1>
+
+          <!-- Subtitle -->
+          <p class="text-xl md:text-2xl text-white/90 mb-4 font-medium">
+            API + SDK + Брендирование · Запуск за 2 недели
+          </p>
+
+          <!-- Description -->
+          <p class="text-lg text-white/70 mb-8 max-w-3xl mx-auto">
+            Предоставьте клиентам полный цикл проектирования ИЖС под вашим брендом. AI-генерация планировок, 3D визуализация, проектная документация — всё через API или готовый интерфейс.
+          </p>
+
+          <!-- CTAs -->
+          <div class="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+            <a
+              href="mailto:partners@planometrica.pro"
+              class="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-[#0A4C76] bg-white rounded-xl hover:bg-gray-100 transition-all duration-200 shadow-lg hover:shadow-xl"
+            >
+              Обсудить интеграцию
+              <svg class="ml-2 w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
+            </a>
+            <a
+              href="#capabilities"
+              class="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold bg-white/10 text-white border border-white/30 rounded-xl hover:bg-white/20 transition-all duration-200"
+            >
+              Скачать презентацию
+              <svg class="ml-2 w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+              </svg>
+            </a>
+          </div>
+
+          <!-- Metrics -->
+          <div class="flex flex-col sm:flex-row items-center justify-center gap-8 sm:gap-12">
+            {metrics.map((metric) => (
+              <div class="text-center">
+                <div class="text-3xl md:text-4xl font-bold text-white mb-1">{metric.value}</div>
+                <div class="text-sm text-white/60">{metric.label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- СЕКЦИЯ 2: Для кого -->
+    <section class="py-24 bg-white">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-16">
+          <span class="inline-block px-4 py-2 bg-[#0A4C76]/10 text-[#0A4C76] font-medium rounded-full text-sm mb-4">
+            Аудитории
+          </span>
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900">
+            Кому подходит White-label
+          </h2>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          {audiences.map((audience) => (
+            <div class="bg-white rounded-2xl p-8 border border-gray-100 hover:shadow-lg transition-all duration-300">
+              <div class="text-[#0A4C76] mb-6">
+                <Fragment set:html={audience.icon} />
+              </div>
+              <h3 class="text-xl font-bold text-gray-900 mb-3">{audience.title}</h3>
+              <p class="text-gray-600 mb-6">{audience.description}</p>
+              <ul class="space-y-2">
+                {audience.features.map((feature) => (
+                  <li class="flex items-start gap-2 text-sm">
+                    <span class="w-1.5 h-1.5 bg-[#0A4C76] rounded-full mt-2 flex-shrink-0"></span>
+                    <span class="text-gray-700">{feature}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- СЕКЦИЯ 3: Что включено -->
+    <section id="capabilities" class="py-24 bg-gray-50">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-16">
+          <span class="inline-block px-4 py-2 bg-[#0A4C76]/10 text-[#0A4C76] font-medium rounded-full text-sm mb-4">
+            Возможности платформы
+          </span>
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900">
+            Полный стек проектирования под вашим брендом
+          </h2>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+          {capabilities.map((capability) => (
+            <div class="bg-white rounded-2xl p-6 border border-gray-100 hover:shadow-lg hover:border-[#1A7BB3]/30 transition-all duration-300">
+              <div class="w-14 h-14 bg-[#0A4C76]/10 rounded-xl flex items-center justify-center text-[#0A4C76] mb-4">
+                <Fragment set:html={capability.icon} />
+              </div>
+              <h3 class="text-xl font-semibold text-[#0A4C76] mb-2">{capability.title}</h3>
+              <p class="text-gray-600 text-sm leading-relaxed">{capability.description}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- СЕКЦИЯ 4: Тарифы -->
+    <section class="py-24 bg-white">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-16">
+          <span class="inline-block px-4 py-2 bg-[#0A4C76]/10 text-[#0A4C76] font-medium rounded-full text-sm mb-4">
+            Тарифы
+          </span>
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900">
+            Прозрачное ценообразование
+          </h2>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+          {pricingPlans.map((plan) => (
+            <div class:list={[
+              "bg-white rounded-2xl p-6 border-2 relative",
+              plan.recommended ? "border-[#0A4C76]" : "border-gray-200"
+            ]}>
+              {plan.recommended && (
+                <div class="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-[#0A4C76] text-white text-xs font-medium rounded-full">
+                  Рекомендуем
+                </div>
+              )}
+              <h3 class="text-xl font-bold text-gray-900 mb-1">{plan.name}</h3>
+              <p class="text-gray-500 text-sm mb-4">{plan.description}</p>
+              <div class="mb-6">
+                <span class="text-4xl font-bold text-[#0A4C76]">{plan.price}</span>
+                {plan.period && <span class="text-gray-500"> ₽{plan.period}</span>}
+              </div>
+              <ul class="space-y-3 mb-6">
+                {plan.features.map((feature) => (
+                  <li class="flex items-start gap-2 text-gray-600 text-sm">
+                    <svg class="w-5 h-5 text-[#0A4C76] flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+              <a
+                href="mailto:partners@planometrica.pro"
+                class:list={[
+                  "block w-full py-3 text-center font-semibold rounded-xl transition-colors",
+                  plan.recommended
+                    ? "text-white bg-[#0A4C76] hover:bg-[#083d5f]"
+                    : "text-[#0A4C76] bg-[#0A4C76]/10 hover:bg-[#0A4C76]/20"
+                ]}
+              >
+                {plan.cta}
+              </a>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- СЕКЦИЯ 5: Процесс -->
+    <section class="py-24 bg-gray-50">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-16">
+          <span class="inline-block px-4 py-2 bg-[#0A4C76]/10 text-[#0A4C76] font-medium rounded-full text-sm mb-4">
+            Процесс
+          </span>
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900">
+            От заявки до запуска — 2 недели
+          </h2>
+        </div>
+
+        <div class="grid md:grid-cols-4 gap-8 max-w-5xl mx-auto">
+          {steps.map((step) => (
+            <div class="text-center">
+              <div class="w-12 h-12 mx-auto mb-4 rounded-full bg-[#0A4C76] flex items-center justify-center text-white font-bold">
+                {step.number}
+              </div>
+              <h3 class="font-semibold text-gray-900 mb-2">{step.title}</h3>
+              <p class="text-gray-600 text-sm">{step.description}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- СЕКЦИЯ 6: CTA -->
+    <section class="py-24 bg-gradient-to-r from-[#0A4C76] to-[#1A7BB3]">
+      <div class="container mx-auto px-4">
+        <div class="max-w-4xl mx-auto text-center">
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6">
+            Готовы обсудить интеграцию?
+          </h2>
+          <p class="text-xl text-white/80 mb-10">
+            Расскажем о возможностях платформы, обсудим ваши сценарии и подготовим коммерческое предложение.
+          </p>
+
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a
+              href="mailto:partners@planometrica.pro"
+              class="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-[#0A4C76] bg-white rounded-xl hover:bg-gray-100 transition-all duration-200 shadow-lg"
+            >
+              Написать на partners@planometrica.pro
+            </a>
+            <a
+              href="tel:+7XXXXXXXXXX"
+              class="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-white border-2 border-white/30 rounded-xl hover:bg-white/10 transition-all duration-200"
+            >
+              +7 (XXX) XXX-XX-XX
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>
