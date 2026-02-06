@@ -1,64 +1,74 @@
 ---
 // Hero section for Планометрика landing
+// Dark gradient background with white text
 ---
 
-<section class="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-[#0A4C76] via-[#1A7BB3] to-[#0A4C76]">
+<section class="relative min-h-[80vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-[#0A4C76] via-[#1A7BB3] to-[#0A4C76]">
   <!-- Background Pattern -->
   <div class="absolute inset-0 opacity-10">
-    <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,<svg width=\"60\" height=\"60\" viewBox=\"0 0 60 60\" xmlns=\"http://www.w3.org/2000/svg\"><g fill=\"none\" fill-rule=\"evenodd\"><g fill=\"%23ffffff\" fill-opacity=\"0.4\"><path d=\"M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\"/></g></g></svg>'); background-size: 60px 60px;"></div>
+    <div class="absolute inset-0" style="background-image: url(&quot;data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E&quot;); background-size: 60px 60px;"></div>
   </div>
 
   <div class="relative z-10 container mx-auto px-4 py-20 text-center">
     <!-- Headline -->
-    <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 tracking-tight">
-      Проектирование домов
-      <span class="block mt-2 bg-gradient-to-r from-[#92CF93] to-[#6BB86D] bg-clip-text text-transparent">
-        с искусственным интеллектом
-      </span>
+    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 tracking-tight leading-tight">
+      AI-платформа проектирования
+      <span class="block mt-2">индивидуальных домов</span>
     </h1>
 
     <!-- Subheadline -->
-    <p class="text-xl md:text-2xl text-white/80 mb-12 max-w-3xl mx-auto leading-relaxed">
-      B2B платформа для архитекторов и строительных компаний.
-      <span class="text-white font-medium">Создавайте проекты в 10 раз быстрее</span> с помощью AI-инструментов.
+    <p class="text-lg md:text-xl text-white/80 mb-10 max-w-3xl mx-auto leading-relaxed">
+      Для тех, кто строит свой дом. Для архитекторов, которые проектируют для клиентов.
+      <span class="block mt-1">Для компаний, которые встраивают проектирование в свои продукты.</span>
     </p>
 
     <!-- CTA Buttons -->
-    <div class="flex flex-col sm:flex-row gap-4 justify-center mb-16">
+    <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
+      <!-- Primary CTA: Accent Green -->
       <a
         href="https://studio.planometrica.ru"
-        class="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-[#0A4C76] bg-white rounded-xl hover:bg-gray-100 transition-all duration-200 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
+        class="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-[#0A4C76] bg-[#92CF93] rounded-xl hover:bg-[#7ec07f] transition-all duration-200 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
       >
-        Попробовать бесплатно
+        Создать свой дом
         <svg class="ml-2 w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
           <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
         </svg>
       </a>
+
+      <!-- Secondary CTA: Glass outline -->
       <a
-        href="#features"
-        class="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-white bg-white/10 backdrop-blur-sm border border-white/30 rounded-xl hover:bg-white/20 transition-all duration-200"
+        href="/planocad"
+        class="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-white border-2 border-white/30 rounded-xl hover:bg-white/10 backdrop-blur-sm transition-all duration-200"
       >
-        Узнать больше
+        Для профессионалов
+      </a>
+
+      <!-- Ghost CTA -->
+      <a
+        href="/partners"
+        class="inline-flex items-center justify-center px-6 py-4 text-lg text-white/70 hover:text-white underline-offset-4 hover:underline transition-all duration-200"
+      >
+        Стать партнёром
       </a>
     </div>
 
     <!-- Stats -->
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 max-w-4xl mx-auto pt-8 border-t border-white/20">
       <div class="text-center">
-        <div class="text-3xl md:text-4xl font-bold text-white mb-1">10x</div>
-        <div class="text-white/70 text-sm">Быстрее проектирование</div>
+        <div class="text-2xl md:text-3xl font-bold text-white mb-1">10 стилей</div>
+        <div class="text-white/70 text-sm">Архитектурных стилей</div>
       </div>
       <div class="text-center">
-        <div class="text-3xl md:text-4xl font-bold text-white mb-1">500+</div>
-        <div class="text-white/70 text-sm">Готовых проектов</div>
+        <div class="text-2xl md:text-3xl font-bold text-white mb-1">25 сек</div>
+        <div class="text-white/70 text-sm">AI-генерация планировки</div>
       </div>
       <div class="text-center">
-        <div class="text-3xl md:text-4xl font-bold text-white mb-1">AI</div>
-        <div class="text-white/70 text-sm">Powered инструменты</div>
+        <div class="text-2xl md:text-3xl font-bold text-white mb-1">18 000+</div>
+        <div class="text-white/70 text-sm">Нормативных документов</div>
       </div>
       <div class="text-center">
-        <div class="text-3xl md:text-4xl font-bold text-white mb-1">B2B</div>
-        <div class="text-white/70 text-sm">Корпоративные решения</div>
+        <div class="text-2xl md:text-3xl font-bold text-white mb-1">от 490 ₽</div>
+        <div class="text-white/70 text-sm">СПОЗУ готов за 1 день</div>
       </div>
     </div>
   </div>
