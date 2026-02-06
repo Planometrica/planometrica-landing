@@ -2,25 +2,31 @@
 // Products section
 const products = [
   {
-    name: 'PlanoCAD',
-    description: 'Профессиональный CAD-редактор для создания планировок. Интуитивный интерфейс, умные инструменты, интеграция с AI.',
-    url: 'https://planocad.ru',
-    features: ['Редактор планировок', 'Библиотека элементов', 'Экспорт в DXF/PDF', 'AI-помощник'],
-    color: 'from-[#0A4C76] to-[#1A7BB3]'
-  },
-  {
     name: 'Студия',
-    description: 'Полнофункциональная студия для проектирования. Создавайте проекты домов от концепции до рабочей документации.',
-    url: 'https://studio.planometrica.ru',
-    features: ['Полный цикл проектирования', '3D визуализация', 'Генерация документации', 'Командная работа'],
-    color: 'from-[#1A7BB3] to-[#92CF93]'
+    badge: 'B2C',
+    description: 'Конструктор дома для тех, кто строит сам. AI создаёт планировку, считает смету, готовит документы.',
+    url: '/studio',
+    features: ['AI-планировки за минуты', '3D-визуализация', 'СПОЗУ от 490 ₽', 'Ипотечный калькулятор'],
+    color: 'from-[#92CF93] to-[#6BB86D]',
+    ctaText: 'Попробовать'
   },
   {
-    name: 'Планометрика Sandbox',
-    description: 'Экспериментальная площадка для тестирования новых AI-инструментов. Пробуйте функции до их релиза.',
-    url: 'https://sandbox.planometrica.pro',
-    features: ['Бета-функции', 'AI эксперименты', 'Ранний доступ', 'Обратная связь'],
-    color: 'from-[#92CF93] to-[#6BB86D]'
+    name: 'ПланоCAD',
+    badge: 'B2B',
+    description: 'Браузерный CAD-редактор для архитекторов. ArchiCAD-подобный интерфейс с AI-ассистентом на каждом шаге.',
+    url: '/planocad',
+    features: ['ArchiCAD-подобный интерфейс', 'Инженерные сети (MEP)', '3D в реальном времени', 'AI-ассистент НейроПлан'],
+    color: 'from-[#0A4C76] to-[#1A7BB3]',
+    ctaText: 'Подробнее'
+  },
+  {
+    name: 'White-label',
+    badge: 'B2B2C',
+    description: 'Встройте проектирование домов в свою платформу. Для банков, девелоперов, маркетплейсов.',
+    url: '/partners',
+    features: ['AI-генерация планировок', '3D и документация', 'Брендирование под вас', 'API-интеграция'],
+    color: 'from-[#1A7BB3] to-[#0A4C76]',
+    ctaText: 'Обсудить интеграцию'
   }
 ]
 ---
@@ -53,6 +59,11 @@ const products = [
               </svg>
             </div>
 
+            <!-- Badge -->
+            <span class="inline-block bg-[#92CF93]/20 text-[#0A4C76] text-xs font-semibold px-3 py-1 rounded-full mb-3 w-fit">
+              {product.badge}
+            </span>
+
             <h3 class="text-2xl font-bold text-gray-900 mb-3">
               {product.name}
             </h3>
@@ -78,9 +89,9 @@ const products = [
               href={product.url}
               class={`inline-flex items-center justify-center w-full px-6 py-3 text-white font-semibold rounded-xl bg-gradient-to-r ${product.color} hover:opacity-90 transition-opacity`}
             >
-              Открыть
+              {product.ctaText}
               <svg class="ml-2 w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
               </svg>
             </a>
           </div>
