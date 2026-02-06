@@ -46,9 +46,12 @@ const isActive = (href: string) => currentPath === href || currentPath.startsWit
       <!-- Logo -->
       <a href="/" class="flex items-center gap-2 group">
         <img
-          src="/images/logo.png"
+          src="/images/Planometrica logo.png"
           alt="Планометрика"
-          class="h-8 w-auto rounded-lg"
+          class:list={[
+            "h-8 w-auto",
+            transparent ? "" : "brightness-0"
+          ]}
         />
         <span
           class:list={[
@@ -243,9 +246,9 @@ const isActive = (href: string) => currentPath === href || currentPath.startsWit
       <div class="flex items-center justify-between px-4 h-16 border-b">
         <a href="/" class="flex items-center gap-2">
           <img
-            src="/images/logo.png"
+            src="/images/Planometrica logo.png"
             alt="Планометрика"
-            class="h-8 w-auto rounded-lg"
+            class="h-8 w-auto brightness-0"
           />
           <span class="text-xl font-semibold text-gray-900 font-logo">Планометрика</span>
         </a>
