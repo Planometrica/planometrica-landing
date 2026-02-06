@@ -228,7 +228,7 @@ function MortgageCalculatorInner({
 
                 {/* CTA */}
                 <a
-                  href="https://studio.planometrica.pro"
+                  href="https://studio.planometrica.ru"
                   className="mt-8 block w-full text-center py-4 px-6 bg-[#92CF93] text-[#0A4C76] font-semibold rounded-xl hover:bg-[#7BC17C] transition-colors"
                 >
                   Подать заявку на ипотеку

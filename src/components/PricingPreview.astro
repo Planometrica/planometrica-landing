@@ -16,7 +16,7 @@ interface Props {
 
 const defaultTiers: PricingTier[] = [
   {
-    name: 'Старт',
+    name: 'Базовый',
     price: 'Бесплатно',
     features: [
       '1 проект',
@@ -25,36 +25,38 @@ const defaultTiers: PricingTier[] = [
       'Базовый CAD-редактор'
     ],
     ctaText: 'Начать бесплатно',
-    ctaHref: 'https://studio.planometrica.pro/register'
+    ctaHref: 'https://studio.planometrica.ru/register'
   },
   {
-    name: 'Профи',
-    badge: 'Популярный',
-    price: '2 990 ₽',
-    priceNote: '/месяц',
+    name: 'Стандарт',
+    badge: 'Рекомендуем',
+    price: '14 900 ₽',
+    priceNote: '/проект',
     features: [
       'Безлимит проектов',
       'AI-рендер визуализации',
       'Экспорт DXF/DWG',
       '3D просмотр',
-      'Приоритетная поддержка'
+      'СПОЗУ + эскизный проект',
+      'Ведомость материалов'
     ],
-    ctaText: 'Выбрать Профи',
-    ctaHref: 'https://studio.planometrica.pro/register',
+    ctaText: 'Выбрать Стандарт',
+    ctaHref: 'https://studio.planometrica.ru/register',
     highlighted: true
   },
   {
-    name: 'Команда',
-    price: 'По запросу',
+    name: 'Для профессионалов',
+    price: 'от 14 900 ₽',
+    priceNote: '/мес',
     features: [
-      'Всё из Профи',
+      'ПланоCAD — браузерный CAD',
+      'AI-ассистент НейроПлан',
+      'Инженерные сети (MEP)',
       'Командная работа',
-      'API доступ',
-      'Брендирование документов',
-      'Персональный менеджер'
+      'API доступ'
     ],
-    ctaText: 'Связаться',
-    ctaHref: 'mailto:hello@planometrica.pro'
+    ctaText: 'Узнать подробнее',
+    ctaHref: '/planocad'
   }
 ]
 

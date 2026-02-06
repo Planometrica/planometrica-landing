@@ -52,7 +52,7 @@ const features = [
 const packages = [
   {
     name: 'СПОЗУ',
-    price: '4 990',
+    price: '490',
     description: 'Для уведомления о строительстве',
     includes: [
       'Схема участка с домом',
@@ -63,36 +63,24 @@ const packages = [
     ]
   },
   {
-    name: 'Эскизный проект',
-    price: '14 990',
-    description: 'Для согласования и визуализации',
+    name: 'Стандарт-пакет',
+    price: '14 900',
+    description: 'Полный комплект документации',
     includes: [
-      'Планы этажей',
-      'Фасады',
+      'Планы этажей + фасады',
+      'СПОЗУ включён',
       '3D визуализация',
-      'Описание конструкций',
+      'Ведомость материалов',
       'Готово за 3 дня'
     ],
     popular: true
-  },
-  {
-    name: 'Полный проект',
-    price: '49 990',
-    description: 'Для строительства',
-    includes: [
-      'Всё из Эскизного',
-      'Разрезы и узлы',
-      'Конструктивные решения',
-      'Ведомости материалов',
-      'Готово за 7 дней'
-    ]
   }
 ]
 ---
 
 <Layout
   title="Документы для строительства дома — СПОЗУ, чертежи, сметы"
-  description="СПОЗУ за 4 990₽, чертежи PDF/DXF, комплект АР+КР. Автоматическая генерация проектной документации по ГОСТ."
+  description="СПОЗУ за 490₽, полный пакет от 14 900₽. Автоматическая генерация проектной документации по ГОСТ."
   keywords="СПОЗУ, проектная документация ИЖС, чертежи дома, документы для строительства, разрешение на строительство"
   ogImage="/images/og-docs.jpg"
   canonical="/docs"
@@ -104,7 +92,7 @@ const packages = [
       subtitle="Готовая документация для строительства"
       description="Автоматическая генерация проектной документации из вашего проекта. СПОЗУ, планы этажей, фасады, разрезы, сметы — всё по ГОСТ."
       gradient="from-[#0A4C76] to-[#1A7BB3]"
-      primaryCta={{ text: 'Создать документы', href: 'https://studio.planometrica.pro/docs' }}
+      primaryCta={{ text: 'Создать документы', href: 'https://studio.planometrica.ru/docs' }}
       secondaryCta={{ text: 'Примеры документов', href: '#examples' }}
       features={['СПОЗУ', 'Планы этажей', 'Фасады', 'Сметы']}
     />
@@ -145,7 +133,7 @@ const packages = [
               <h3 class="text-xl font-semibold text-gray-900 mb-2">{pkg.name}</h3>
               <p class="text-gray-600 mb-6">{pkg.description}</p>
               <div class="mb-6">
-                <span class="text-4xl font-bold text-gray-900">{pkg.price} ₽</span>
+                <span class="text-4xl font-bold text-[#0A4C76]">{pkg.price} ₽</span>
               </div>
               <ul class="space-y-3 mb-8">
                 {pkg.includes.map((item) => (
@@ -158,7 +146,7 @@ const packages = [
                 ))}
               </ul>
               <a
-                href="https://studio.planometrica.pro/docs"
+                href="https://studio.planometrica.ru/docs"
                 class:list={[
                   "block w-full py-3 text-center font-semibold rounded-xl transition-colors",
                   pkg.popular
@@ -214,7 +202,7 @@ const packages = [
     <ProductCTA
       title="Получите документацию за минуты"
       description="Загрузите проект — получите готовый комплект документов для строительства."
-      primaryCta={{ text: 'Создать документы', href: 'https://studio.planometrica.pro/docs' }}
+      primaryCta={{ text: 'Создать документы', href: 'https://studio.planometrica.ru/docs' }}
       secondaryCta={{ text: 'Консультация', href: 'mailto:hello@planometrica.pro' }}
     />
   </main>
