@@ -1,5 +1,14 @@
 @import "tailwindcss";
 
+/* TT Fors — brand font for logo text */
+@font-face {
+  font-family: 'TT Fors';
+  src: url('/fonts/tt-fors-demibold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* Планометрика Design System CSS Variables */
 @layer base {
   :root {
@@ -172,7 +181,7 @@
   --color-warning: #F59E0B;
 
   --font-family-sans: 'Inter', system-ui, sans-serif;
-  --font-family-logo: 'Aileron', 'Inter', sans-serif;
+  --font-family-logo: 'TT Fors', 'Inter', sans-serif;
   --font-family-mono: 'JetBrains Mono', 'Fira Code', monospace;
 
   /* Chart colors */
