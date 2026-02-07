@@ -16,6 +16,41 @@ const seoData = {
   keywords: 'проект дома, проектирование дома, AI архитектор, планировка дома, ИЖС проект, строительство дома',
   ogImage: '/images/og-home.jpg'
 }
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'Планометрика',
+    alternateName: 'Planometrica',
+    url: 'https://planometrica.ru',
+    logo: 'https://planometrica.ru/images/logo.png',
+    description: seoData.description,
+    contactPoint: {
+      '@type': 'ContactPoint',
+      telephone: '+7-800-300-89-58',
+      contactType: 'customer service',
+      areaServed: 'RU',
+      availableLanguage: 'Russian',
+    },
+    address: {
+      '@type': 'PostalAddress',
+      addressCountry: 'RU',
+    },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'Планометрика',
+    url: 'https://planometrica.ru',
+    description: seoData.description,
+    inLanguage: 'ru',
+    publisher: {
+      '@type': 'Organization',
+      name: 'Планометрика',
+    },
+  },
+]
 ---
 
 <Layout
@@ -23,6 +58,7 @@ const seoData = {
   description={seoData.description}
   keywords={seoData.keywords}
   ogImage={seoData.ogImage}
+  schema={schema}
   transparentHeader={true}
 >
   <main>

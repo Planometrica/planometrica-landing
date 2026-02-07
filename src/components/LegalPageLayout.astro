@@ -3,15 +3,16 @@ import Layout from '../layouts/Layout.astro'
 
 interface Props {
   title: string
+  description?: string
   lastUpdated: string
 }
 
-const { title, lastUpdated } = Astro.props
+const { title, description, lastUpdated } = Astro.props
 ---
 
 <Layout
   title={`${title} — Планометрика`}
-  description={title}
+  description={description || `${title}. ООО «Инженерные цифровые технологии» (ООО «ИЦТ»). Планометрика — AI-платформа проектирования домов.`}
   transparentHeader={false}
 >
   <main class="py-16 bg-white">

@@ -84,11 +84,32 @@ const portableTextComponents = {
 
 const bodyHtml = post.body ? toHTML(post.body, { components: portableTextComponents }) : ''
 const shareUrl = `https://planometrica.ru/blog/${post.slug.current}`
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: post.title,
+  description: post.excerpt,
+  url: shareUrl,
+  datePublished: post.publishedAt,
+  ...(post.mainImage?.asset && { image: urlFor(post.mainImage).width(1200).url() }),
+  author: {
+    '@type': 'Person',
+    name: post.author?.name || 'Планометрика',
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: 'Планометрика',
+    logo: { '@type': 'ImageObject', url: 'https://planometrica.ru/images/logo.png' },
+  },
+  mainEntityOfPage: { '@type': 'WebPage', '@id': shareUrl },
+}
 ---
 
 <Layout
   title={`${post.title} — Блог Планометрики`}
   description={post.excerpt}
+  schema={articleSchema}
 >
   <main>
     <div class="pt-24 pb-4 bg-white border-b border-gray-100">

@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+Disallow: /legal/
+
+Sitemap: https://planometrica.ru/sitemap-index.xml

@@ -66,6 +66,20 @@ const plotFeatures = [
   keywords="конструктор дома, проект дома онлайн, планировка дома, строительство дома, проект дома бесплатно"
   ogImage="/images/og-studio.jpg"
   canonical="/studio"
+  schema={{
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: 'Планометрика Студия',
+    applicationCategory: 'DesignApplication',
+    operatingSystem: 'Web',
+    description: 'Конструктор дома мечты для частных заказчиков. AI создаёт планировку, считает смету, готовит документы.',
+    url: 'https://planometrica.ru/studio',
+    offers: [
+      { '@type': 'Offer', name: 'Базовый', price: '0', priceCurrency: 'RUB', description: '1 проект, AI-генерация, экспорт PDF' },
+      { '@type': 'Offer', name: 'Стандарт', price: '14900', priceCurrency: 'RUB', description: 'Безлимит проектов, AI-рендер, 3D, полный пакет документации' },
+    ],
+    provider: { '@type': 'Organization', name: 'Планометрика' },
+  }}
   transparentHeader={true}
 >
   <main>

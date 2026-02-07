@@ -167,6 +167,21 @@ const fallbackCategories: FAQCategory[] = [
 const sanityCategories = await getFAQByCategories()
 const faqCategories = sanityCategories.length > 0 ? sanityCategories : fallbackCategories
 const usingSanity = isSanityConfigured() && sanityCategories.length > 0
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqCategories.flatMap((cat) =>
+    cat.items.map((item) => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: item.answer,
+      },
+    }))
+  ),
+}
 ---
 
 <Layout
@@ -175,6 +190,7 @@ const usingSanity = isSanityConfigured() && sanityCategories.length > 0
   keywords="вопросы о проектировании дома, FAQ Планометрика, помощь проектирование, как создать проект дома"
   ogImage="/images/og-faq.jpg"
   canonical="/faq"
+  schema={faqSchema}
 >
   <main>
     <!-- Hero -->

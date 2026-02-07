@@ -9,6 +9,22 @@ import ROICalculator from '../components/ROICalculator'
   keywords="CAD проектирование, софт для архитекторов, проектирование ИЖС, BIM, ArchiCAD альтернатива, MEP"
   ogImage="/images/og-planocad.jpg"
   canonical="/planocad"
+  schema={{
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: 'ПланоCAD',
+    applicationCategory: 'DesignApplication',
+    operatingSystem: 'Web',
+    description: 'ArchiCAD-подобный редактор в браузере с AI-ассистентом. Архитектура, MEP, 3D, документация.',
+    url: 'https://planometrica.ru/planocad',
+    featureList: 'Pet Palette, Info Box, Navigator, Multi-Story, MEP, 3D визуализация, AI-ассистент НейроПлан',
+    offers: [
+      { '@type': 'Offer', name: 'Старт', price: '14900', priceCurrency: 'RUB', unitText: 'мес', description: '1 пользователь' },
+      { '@type': 'Offer', name: 'ПРО', price: '33200', priceCurrency: 'RUB', unitText: 'мес', description: 'до 5 пользователей' },
+      { '@type': 'Offer', name: 'Компания', price: '80000', priceCurrency: 'RUB', unitText: 'мес', description: '10+ пользователей' },
+    ],
+    provider: { '@type': 'Organization', name: 'Планометрика' },
+  }}
   transparentHeader={true}
 >
   <main>

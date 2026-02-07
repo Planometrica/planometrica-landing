@@ -8,6 +8,18 @@ import Layout from '../layouts/Layout.astro'
   keywords="AI архитектор, генерация планировок, нейросеть проектирование, смета строительства, НейроПлан"
   ogImage="/images/og-neuroplan.jpg"
   canonical="/neuroplan"
+  schema={{
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: 'НейроПлан',
+    applicationCategory: 'DesignApplication',
+    applicationSubCategory: 'AI',
+    operatingSystem: 'Web',
+    description: 'AI-ассистент для проектирования домов: генерация планировок, анализ чертежей, сметы по реальным ценам. 18,000+ нормативных документов.',
+    url: 'https://planometrica.ru/neuroplan',
+    featureList: 'Генерация планировок, анализ чертежей, сметы по реальным ценам, RAG на 18000+ нормативов, Vision-анализ',
+    provider: { '@type': 'Organization', name: 'Планометрика' },
+  }}
   transparentHeader={true}
 >
   <main>
