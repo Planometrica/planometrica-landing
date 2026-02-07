@@ -32,6 +32,7 @@ const schemaArray = schema ? (Array.isArray(schema) ? schema : [schema]) : []
 const siteUrl = import.meta.env.PUBLIC_SITE_URL || 'https://planometrica.pro'
 const canonicalUrl = canonical ? `${siteUrl}${canonical}` : Astro.url.href
 const ogImageUrl = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`
+const isProd = import.meta.env.PROD
 ---
 
 <!doctype html>
@@ -79,5 +80,32 @@ const ogImageUrl = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`
     {!hideHeader && <Header transparent={transparentHeader} />}
     <slot />
     {!hideFooter && <Footer />}
+
+    {/* Analytics — только production build */}
+    {isProd && (
+      <>
+        {/* Google Analytics (GA4) */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-8F7FP3LX5P"></script>
+        <script is:inline>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-8F7FP3LX5P');
+        </script>
+
+        {/* Yandex.Metrika */}
+        <script is:inline>
+          (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+          m[i].l=1*new Date();
+          for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r)return;}
+          k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+          (window,document,'script','https://mc.yandex.ru/metrika/tag.js','ym');
+          ym(104628425,'init',{clickmap:true,trackLinks:true,accurateTrackBounce:true,webvisor:true});
+        </script>
+        <noscript>
+          <div><img src="https://mc.yandex.ru/watch/104628425" style="position:absolute;left:-9999px;" alt="" /></div>
+        </noscript>
+      </>
+    )}
   </body>
 </html>
