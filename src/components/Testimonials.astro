@@ -7,14 +7,8 @@ interface Testimonial {
   avatar?: string
 }
 
-interface Metric {
-  value: string
-  label: string
-}
-
 interface Props {
   testimonials?: Testimonial[]
-  metrics?: Metric[]
 }
 
 const defaultTestimonials: Testimonial[] = [
@@ -38,14 +32,7 @@ const defaultTestimonials: Testimonial[] = [
   }
 ]
 
-const defaultMetrics: Metric[] = [
-  { value: '2,500+', label: 'Проектов создано' },
-  { value: '30 мин', label: 'Среднее время' },
-  { value: '98%', label: 'Довольных клиентов' },
-  { value: '15+', label: 'Регионов России' }
-]
-
-const { testimonials = defaultTestimonials, metrics = defaultMetrics } = Astro.props
+const { testimonials = defaultTestimonials } = Astro.props
 ---
 
 <section class="py-20 lg:py-28 bg-gradient-to-b from-white to-gray-50">
@@ -118,24 +105,6 @@ const { testimonials = defaultTestimonials, metrics = defaultMetrics } = Astro.p
       </div>
     </div>
 
-    {/* Metrics */}
-    {metrics && metrics.length > 0 && (
-      <div class="max-w-4xl mx-auto">
-        <div class="border-t border-gray-200 pt-12">
-          <p class="text-center text-sm font-medium text-gray-500 uppercase tracking-wider mb-8">
-            📊 Результаты пользователей
-          </p>
-          <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {metrics.map((metric) => (
-              <div class="text-center">
-                <p class="text-3xl md:text-4xl font-bold text-[#0A4C76] mb-1">{metric.value}</p>
-                <p class="text-sm text-gray-600">{metric.label}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    )}
   </div>
 </section>
 
