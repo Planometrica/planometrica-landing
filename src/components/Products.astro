@@ -11,9 +11,18 @@ const products = [
     ctaText: 'Попробовать'
   },
   {
+    name: 'НейроПлан',
+    badge: 'AI',
+    description: 'AI-ассистент с базой знаний 180+ нормативов. Генерация планировок за 25 секунд, проверка по СНиП.',
+    url: '/neuroplan',
+    features: ['Генерация планировок за 25 сек', '180+ нормативных документов', 'Vision-анализ чертежей', 'Ведомость материалов'],
+    color: 'from-[#92CF93] to-[#1A7BB3]',
+    ctaText: 'Подробнее'
+  },
+  {
     name: 'ПланоCAD',
     badge: 'B2B',
-    description: 'Браузерный CAD-редактор для архитекторов. ArchiCAD-подобный интерфейс с AI-ассистентом на каждом шаге.',
+    description: 'Браузерный CAD-редактор для архитекторов и строителей с AI-ассистентом на каждом шаге.',
     url: '/planocad',
     features: ['ArchiCAD-подобный интерфейс', 'Инженерные сети (MEP)', '3D в реальном времени', 'AI-ассистент НейроПлан'],
     color: 'from-[#0A4C76] to-[#1A7BB3]',
@@ -22,9 +31,9 @@ const products = [
   {
     name: 'White-label',
     badge: 'B2B2C',
-    description: 'Встройте проектирование домов в свою платформу. Для банков, девелоперов, маркетплейсов.',
+    description: 'Встройте создание эскизных проектов в свой сайт. Для банков, строителей и девелоперов.',
     url: '/partners',
-    features: ['AI-генерация планировок', '3D и документация', 'Брендирование под вас', 'API-интеграция'],
+    features: ['AI-генерация планировок', '3D-визуализация', 'Брендирование', 'API-интеграция'],
     color: 'from-[#1A7BB3] to-[#0A4C76]',
     ctaText: 'Обсудить интеграцию'
   }
@@ -42,12 +51,12 @@ const products = [
         Экосистема Планометрики
       </h2>
       <p class="text-xl text-gray-600 max-w-2xl mx-auto">
-        Набор инструментов для любых задач проектирования — от быстрых скетчей до полной проектной документации
+        От идеи до готового проекта - выберите продукт под вашу задачу
       </p>
     </div>
 
     <!-- Products Grid -->
-    <div class="grid lg:grid-cols-3 gap-8">
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
       {products.map((product) => (
         <div class="relative group">
           <div class={`absolute inset-0 bg-gradient-to-br ${product.color} rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl`}></div>
