@@ -27,7 +27,7 @@ export const architecturalStyles: StyleData[] = [
     name: 'Классика',
     tagline: 'Симметрия, элегантность, благородный декор',
     description:
-      'Классический стиль наследует традиции русской усадебной архитектуры XVIII–XIX веков и античные каноны. Это сдержанные, элегантные загородные дома с чётко выраженной симметрией и благородным декором. Самый популярный стиль в России — 38,3% рынка.',
+      'Классический стиль наследует традиции русской усадебной архитектуры XVIII–XIX веков и античные каноны. Это сдержанные, элегантные загородные дома с чётко выраженной симметрией и благородным декором.',
     features: [
       'Строгая двусторонняя симметрия фасада',
       'Вальмовая крыша с пологим уклоном 25–35°',
@@ -42,7 +42,7 @@ export const architecturalStyles: StyleData[] = [
   {
     id: 'scandinavian',
     name: 'Скандинавский',
-    tagline: 'Светлые фасады, дерево, уют',
+    tagline: 'Светлые фасады, дерево, уют\nМаксимум естественного света',
     description:
       'Стиль сформировался в суровом климате Скандинавии. Философия — единение с природой, максимум естественного света и натуральных материалов. Простые, функциональные деревянные дома с уютной атмосферой хюгге.',
     features: [
@@ -57,6 +57,7 @@ export const architecturalStyles: StyleData[] = [
     images: [
       '/images/styles/scandinavian-1.png',
       '/images/styles/scandinavian-2.png',
+      '/images/styles/scandinavian-3.png',
     ],
   },
   {
@@ -64,7 +65,7 @@ export const architecturalStyles: StyleData[] = [
     name: 'Минимализм',
     tagline: 'Чистые линии, плоские крыши, панорамные окна',
     description:
-      'Философия «меньше значит больше» — максимум функциональности при минимуме деталей. Строгие геометрические линии, однотонные поверхности и акцент на текстурах материалов. Лидирующий тренд — 60% построек в 2024 году.',
+      'Философия «меньше значит больше» — максимум функциональности при минимуме деталей. Строгие геометрические линии, однотонные поверхности и акцент на текстурах материалов.',
     features: [
       'Строгие кубические формы без декора',
       'Плоская или односкатная эксплуатируемая крыша',
@@ -77,6 +78,7 @@ export const architecturalStyles: StyleData[] = [
     images: [
       '/images/styles/minimalism-1.png',
       '/images/styles/minimalism-2.png',
+      '/images/styles/minimalism-3.png',
     ],
   },
   {
@@ -97,6 +99,7 @@ export const architecturalStyles: StyleData[] = [
     images: [
       '/images/styles/barnhouse-1.png',
       '/images/styles/barnhouse-2.png',
+      '/images/styles/barnhouse-3.jpg',
     ],
   },
   {
@@ -114,7 +117,7 @@ export const architecturalStyles: StyleData[] = [
     ],
     params: { floors: '1–2 этажа', area: '40–120 м²', cost: '30 000–55 000 ₽/м²' },
     gradient: 'from-teal-500 to-teal-700',
-    images: ['/images/styles/aframe-1.png', '/images/styles/aframe-2.png'],
+    images: ['/images/styles/aframe-1.png', '/images/styles/aframe-2.png', '/images/styles/aframe-3.png'],
   },
   {
     id: 'fachwerk',
@@ -134,6 +137,7 @@ export const architecturalStyles: StyleData[] = [
     images: [
       '/images/styles/fachwerk-1.png',
       '/images/styles/fachwerk-2.png',
+      '/images/styles/fachwerk-3.png',
     ],
   },
   {
@@ -151,7 +155,7 @@ export const architecturalStyles: StyleData[] = [
     ],
     params: { floors: '2 этажа', area: '150–350 м²', cost: '75 000–120 000 ₽/м²' },
     gradient: 'from-green-500 to-emerald-700',
-    images: ['/images/styles/chalet-1.png', '/images/styles/chalet-2.png'],
+    images: ['/images/styles/chalet-1.png', '/images/styles/chalet-2.png', '/images/styles/chalet-3.png'],
   },
   {
     id: 'hightech',
@@ -171,11 +175,12 @@ export const architecturalStyles: StyleData[] = [
     images: [
       '/images/styles/hightech-1.png',
       '/images/styles/hightech-2.png',
+      '/images/styles/hightech-3.png',
     ],
   },
   {
     id: 'russian',
-    name: 'Русский/Изба',
+    name: 'Русский',
     tagline: 'Традиционный сруб, резные наличники',
     description:
       'Традиционное жилище славян с X–XI веков. Деревянный сруб с резными наличниками, ставнями и причелинами. Экологичный микроклимат натурального дерева — зимой тепло, летом прохладно. Тренд 2026 — стиль «a-la russe».',
@@ -188,7 +193,7 @@ export const architecturalStyles: StyleData[] = [
     ],
     params: { floors: '1–2 этажа', area: '80–250 м²', cost: '55 000–95 000 ₽/м²' },
     gradient: 'from-red-600 to-red-800',
-    images: ['/images/styles/russian-1.png', '/images/styles/russian-2.png'],
+    images: ['/images/styles/russian-1.png', '/images/styles/russian-2.png', '/images/styles/russian-3.png'],
   },
   {
     id: 'contemporary',
@@ -208,6 +213,7 @@ export const architecturalStyles: StyleData[] = [
     images: [
       '/images/styles/contemporary-1.png',
       '/images/styles/contemporary-2.png',
+      '/images/styles/contemporary-3.png',
     ],
   },
 ]
