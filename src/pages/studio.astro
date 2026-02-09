@@ -116,7 +116,7 @@ const plotFeatures = [
         </div>
 
         <!-- Desktop: 2 rows (4 + 3) -->
-        <div class="hidden lg:block max-w-6xl mx-auto">
+        <div class="hidden lg:block">
           <!-- Row 1: Steps 1-4 -->
           <div class="grid grid-cols-4 gap-6 mb-8">
             {workflowSteps.slice(0, 4).map((step, index) => (
@@ -195,7 +195,7 @@ const plotFeatures = [
           </p>
         </div>
 
-        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto mb-12">
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
           {plotFeatures.map((feature) => (
             <div class="bg-white rounded-2xl p-6 border border-gray-200 hover:shadow-lg transition-shadow">
               <div class="w-12 h-12 rounded-xl bg-[#1A7BB3]/10 flex items-center justify-center text-2xl mb-4">
@@ -229,7 +229,7 @@ const plotFeatures = [
           </h2>
         </div>
 
-        <div class="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
+        <div class="grid md:grid-cols-2 gap-8">
           <!-- Free -->
           <div class="bg-white rounded-2xl p-8 border border-gray-200">
             <h3 class="text-xl font-semibold text-gray-900 mb-2">Базовый</h3>
